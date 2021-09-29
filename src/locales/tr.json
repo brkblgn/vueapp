@@ -1,0 +1,67 @@
+{
+    "header": {
+        "title": "Gorev",
+        "new_notification": "yeni bildirim",
+        "company": "OVAVO Teknoloji A.S.",
+        "apps": "Uygulamalar",
+        "new_app": "Uygulama Ekle",
+        "settings": "Ayarlar"
+    },
+    "apps": {
+        "stock": "Stok",
+        "manufacturing": "Uretim",
+        "project": "Proje",
+        "contacts": "Kontaklar",
+        "clients": "Musteriler",
+        "sales": "Satislar"        
+    },
+    "navbar": {
+        "sales": {
+            "orders": "Siparisler",
+            "invoices": "Faturalar"
+        },
+        "stock": {
+            "products": "Urunler"
+        }
+    },
+    "stock": {
+        "products": {
+            "products": "Urunler",
+            "create_product": "Urun Ekle"
+        }
+    },
+    "contacts": {
+        "title": "Kontaklar",
+        "contacts": {
+            "products": "Urunler",
+            "create_report": "Kontak Raporu Olustur",
+            "create_contact": "Kontak Olustur"
+        }
+    },
+    "sales": {
+        "sales": "Satislar",
+        "clients": "Musteriler",
+        "navbar": {
+            "orders": "Siparisler",
+            "invoices": "Faturalar"
+        },
+        "invoices": {
+            "invoices": "Faturalar",
+            "create_report": "Satis Raporu Olustur",
+            "create_invoice": "Fatura Olustur",
+            "products": "Urunler",
+            "table": {
+                "client": "Musteri",
+                "price": "Tutar",
+                "created_at": "Tarih"
+            },
+            "modal" : {
+                "new_invoice": "Fatura Olustur",
+                "invoice_title": "Fatura Basligi"
+            }
+        },
+        "table": {
+            "products": "Urunler"
+        }
+    }
+}

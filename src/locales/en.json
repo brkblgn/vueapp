@@ -1,0 +1,50 @@
+{
+    "header": {
+        "title": "Title",
+        "new_notification": "new notification",
+        "company": "OVAVO Teknoloji A.S.",
+        "apps": "Apps",
+        "new_app": "Add App",
+        "settings": "Settings"
+    },
+    "apps": {
+        "stock": "Stock",
+        "manufacturing": "Manufacturing",
+        "project": "Project",
+        "sales": "Sales"        
+    },
+    "navbar": {
+        "sales": {
+            "orders": "Orders",
+            "invoices": "Invoices"
+        },
+        "stock": {
+            "products": "Products"
+        }
+    },
+    "stock": {
+        "products": "Products"
+    },
+    "sales": {
+        "sales": "Sales",
+        "clients": "Clients",
+        "navbar": {
+            "orders": "Orders",
+            "invoices": "Invoices"
+        },
+        "invoices": {
+            "invoices": "Invoices",
+            "create_report": "Create Report",
+            "create_invoice": "Create Invoice",
+            "products": "Products",
+            "table": {
+                "client": "Client",
+                "price": "Price",
+                "created_at": "Created at"
+            }
+        },
+        "table": {
+            "products": "Products"
+        }
+    }
+}
