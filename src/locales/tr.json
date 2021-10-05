@@ -13,7 +13,7 @@
         "project": "Proje",
         "contacts": "Kontaklar",
         "clients": "Musteriler",
-        "sales": "Satislar"        
+        "sales": "Satislar"
     },
     "navbar": {
         "sales": {
@@ -27,7 +27,15 @@
     "stock": {
         "products": {
             "products": "Urunler",
-            "create_product": "Urun Ekle"
+            "create_product": "Ürün Ekle",
+            "modal": {
+                "new_product": "Ürün Ekle",
+                "product_name": "Ürün Adı",
+                "product_salesPrice": "Satış Fiyatı",
+                "product_cost":"Ürün Alış Fiyatı",
+                "product_stock":"Stok Miktarı"
+
+            }
         }
     },
     "contacts": {
@@ -35,7 +43,19 @@
         "contacts": {
             "products": "Urunler",
             "create_report": "Kontak Raporu Olustur",
-            "create_contact": "Kontak Olustur"
+            "create_contact": "Kontak Oluştur",
+            "modal": {
+                "new_contact": "Kontak Oluştur",
+                "contact_name": "Ad ve Soyad",
+                "contact_email": "Eposta",
+                "contact_phone":"Phone number",
+                "contact_adress": {
+                    "street": "Sokak",
+                    "town": "Şehir/Town",
+                    "city": "Şehir/City",
+                    "country": "Ülke"
+                }
+            }
         }
     },
     "sales": {
@@ -55,7 +75,7 @@
                 "price": "Tutar",
                 "created_at": "Tarih"
             },
-            "modal" : {
+            "modal": {
                 "new_invoice": "Fatura Olustur",
                 "invoice_title": "Fatura Basligi"
             }

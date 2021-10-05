@@ -109,7 +109,7 @@
               <div class="card-body">
                 <dl class="row">
                   <dt class="col-5">ID:</dt>
-                  <dd class="col-7">{{ contact?.id }} </dd>
+                  <dd class="col-7">{{ contact?._id }} </dd>
                   <dt class="col-5">Name:</dt>
                   <dd class="col-7">{{ contact?.name }}</dd>
                   <dt class="col-5">Location:</dt>
@@ -119,9 +119,11 @@
                   <dt class="col-5">E-mail:</dt>
                   <dd class="col-7">{{ contact?.email }}</dd>
                   <dt class="col-5">Telephone:</dt>
-                  <dd class="col-7">{{ contact?.telephone }}</dd>
+                  <dd class="col-7">{{ contact?.phone }}</dd>
+                  <dt class="col-5"> Mobile:</dt>
+                  <dd class="col-7">{{ contact?.mobile }}</dd>
                   <dt class="col-5">Address:</dt>
-                  <dd class="col-7">{{ contact?.address }}</dd>
+                  <dd class="col-7">{{contact?.address.street}} {{contact?.address.town}} {{contact?.address.city}} {{contact?.address.country}}</dd>
                 </dl>
               </div>
             </div>
@@ -133,10 +135,12 @@
 </template>
 
 <script>
+  /* eslint no-underscore-dangle: 0 */
+/* eslint "no-trailing-spaces": ["warn", {"skipBlankLines": true}] */
 import { mapGetters } from 'vuex';
 import {
   loadRecords, createRecord, deleteRecord,
-} from '@/services/modela';
+} from '@/services/model';
 
 export default {
   data() {
@@ -165,9 +169,12 @@ export default {
     },
     contact: {
       get() {
-        const idd = Number(this.$route.params.id);
-        return idd ? this.contacts.filter((contact) => (contact).id === idd)[0] : {};
-      },
+        const idd = this.$route.params.id;
+        console.log(this.$route.params.id)
+        console.log(Number(this.$route.params.id)) 
+        // return idd ? this.contacts.filter((contact) => (contact)._id === idd) : {};
+        return idd ? this.contacts.find((contact) => (contact)._id === idd) : {};      
+        },
     },
   },
   methods: {

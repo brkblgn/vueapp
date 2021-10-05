@@ -6,15 +6,15 @@
         <div class="row align-items-center">
           <div class="col">
             <!-- Page pre-title -->
-            <div class="page-pretitle">{{ $t("sales.sales") }}</div>
-            <h2 class="page-title">{{ $t("sales.invoices.invoices") }}</h2>
+            <div class="page-pretitle">{{ $t("sales.sales") }}</div>  <!-- Satislar -->
+            <h2 class="page-title">{{ $t("sales.invoices.invoices") }}</h2> <!-- Faturalar -->
           </div>
           <!-- Page title actions -->
           <div class="col-auto ms-auto d-print-none">
             <div class="btn-list">
               <span class="d-none d-sm-inline">
                 <a href="#" class="btn btn-white">
-                  {{ $t("sales.invoices.create_report") }}
+                  {{ $t("sales.invoices.create_report") }} <!-- "Satis Raporu Olustur", -->
                 </a>
               </span>
               <a
@@ -40,7 +40,7 @@
                   <line x1="12" y1="5" x2="12" y2="19" />
                   <line x1="5" y1="12" x2="19" y2="12" />
                 </svg>
-                {{ $t("sales.invoices.create_invoice") }}
+                {{ $t("sales.invoices.create_invoice") }} <!-- "Fatura Olustur", -->
               </a>
               <a
                 href="#"
@@ -140,11 +140,11 @@
                         </svg>
                       </th>
                       <th>Invoice Subject</th>
-                      <th>{{ $t("sales.invoices.table.client") }}</th>
+                      <th>{{ $t("sales.invoices.table.client") }}</th>  <!-- Musteri -->
                       <th>VAT No.</th>
-                      <th>{{ $t("sales.invoices.table.created_at") }}</th>
+                      <th>{{ $t("sales.invoices.table.created_at") }}</th><!-- Tarih -->
                       <th>Status</th>
-                      <th>{{ $t("sales.invoices.table.price") }}</th>
+                      <th>{{ $t("sales.invoices.table.price") }}</th><!-- Tutar -->
                       <th></th>
                     </tr>
                   </thead>
@@ -508,7 +508,7 @@ import {
   loadRecords,
   createRecord,
   deleteRecord,
-} from '@/services/modela';
+} from '@/services/model';
 
 export default {
   data() {

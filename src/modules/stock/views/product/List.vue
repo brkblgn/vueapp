@@ -40,7 +40,7 @@
                   <line x1="12" y1="5" x2="12" y2="19" />
                   <line x1="5" y1="12" x2="19" y2="12" />
                 </svg>
-                {{ $t("sales.invoices.create_invoice") }}
+                {{ $t("stock.products.create_product") }}
               </a>
               <a
                 href="#"
@@ -279,7 +279,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">New report</h5>
+          <h5 class="modal-title">{{ $t("stock.products.create_product") }}</h5>
           <button
             type="button"
             class="btn-close"
@@ -291,318 +291,50 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="mb-3">
-                <label class="form-label">Fatura Basligi</label>
-                <input type="text" class="form-control" />
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">product</label>
-                <select
+                <label class="form-label">{{
+                  $t("stock.products.modal.product_name")
+                }}</label>
+                <input
                   type="text"
-                  class="form-select"
-                  placeholder="Select a date"
-                  id="select-people"
-                  value=""
-                >
-                  <option
-                    value="1"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/000m.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Paweł Kuna
-                  </option>
-                  <option
-                    value="2"
-                    data-custom-properties='&lt;span class="avatar avatar-xs"&gt;JL&lt;/span&gt;'
-                  >
-                    Jeffie Lewzey
-                  </option>
-                  <option
-                    value="3"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/002m.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Mallory Hulme
-                  </option>
-                  <option
-                    value="4"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/003m.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Dunn Slane
-                  </option>
-                  <option
-                    value="5"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/000f.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Emmy Levet
-                  </option>
-                  <option
-                    value="6"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/001f.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Maryjo Lebarree
-                  </option>
-                  <option
-                    value="7"
-                    data-custom-properties='&lt;span class="avatar avatar-xs"&gt;EP&lt;/span&gt;'
-                  >
-                    Egan Poetz
-                  </option>
-                  <option
-                    value="8"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/002f.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Kellie Skingley
-                  </option>
-                  <option
-                    value="9"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/003f.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Christabel Charlwood
-                  </option>
-                  <option
-                    value="10"
-                    data-custom-properties='&lt;span class="avatar avatar-xs"&gt;HS&lt;/span&gt;'
-                  >
-                    Haskel Shelper
-                  </option>
-                  <option
-                    value="11"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/006m.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Lorry Mion
-                  </option>
-                  <option
-                    value="12"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/004f.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Leesa Beaty
-                  </option>
-                  <option
-                    value="13"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/007m.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Perren Keemar
-                  </option>
-                  <option
-                    value="14"
-                    data-custom-properties='&lt;span class="avatar avatar-xs"&gt;SA&lt;/span&gt;'
-                  >
-                    Sunny Airey
-                  </option>
-                  <option
-                    value="15"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/009m.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Geoffry Flaunders
-                  </option>
-                  <option
-                    value="16"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/010m.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Thatcher Keel
-                  </option>
-                  <option
-                    value="17"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/005f.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Dyann Escala
-                  </option>
-                  <option
-                    value="18"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/006f.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Avivah Mugleston
-                  </option>
-                  <option
-                    value="19"
-                    data-custom-properties='&lt;span class="avatar avatar-xs"&gt;AA&lt;/span&gt;'
-                  >
-                    Arlie Armstead
-                  </option>
-                  <option
-                    value="20"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/008f.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Tessie Curzon
-                  </option>
-                </select>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">invoice address</label>
-                <input type="date" class="form-control" />
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">delivery address</label>
-                <input type="date" class="form-control" />
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">exp</label>
-                <input type="date" class="form-control" />
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">pricelist</label>
-                <input type="date" class="form-control" />
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">payment term</label>
-                <input type="date" class="form-control" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label class="form-label">Fatura Basligi</label>
-            <input
-              type="text"
-              class="form-control"
-              name="example-text-input"
-              placeholder="Your report name"
-              v-model="new_product.company"
-            />
-          </div>
-          <label class="form-label">Report type</label>
-          <div class="form-selectgroup-boxes row mb-3">
-            <div class="col-lg-6">
-              <label class="form-selectgroup-item">
-                <input
-                  type="radio"
-                  name="report-type"
-                  value="1"
-                  class="form-selectgroup-input"
-                  checked
+                  class="form-control"
+                  autocomplete="off"
+                  v-model="this.new_product.name"
                 />
-                <span
-                  class="form-selectgroup-label d-flex align-items-center p-3"
-                >
-                  <span class="me-3">
-                    <span class="form-selectgroup-check"></span>
-                  </span>
-                  <span class="form-selectgroup-label-content">
-                    <span class="form-selectgroup-title strong mb-1"
-                      >Simple</span
-                    >
-                    <span class="d-block text-muted"
-                      >Provide only basic data needed for the report</span
-                    >
-                  </span>
-                </span>
-              </label>
+              </div>
             </div>
             <div class="col-lg-6">
-              <label class="form-selectgroup-item">
+              <div class="mb-3">
+                <label class="form-label">{{
+                  $t("stock.products.modal.product_salesPrice")
+                }}</label>
                 <input
-                  type="radio"
-                  name="report-type"
-                  value="1"
-                  class="form-selectgroup-input"
+                  type="text"
+                  class="form-control"
+                  autocomplete="off"
+                  v-model="this.new_product.salesPrice"
                 />
-                <span
-                  class="form-selectgroup-label d-flex align-items-center p-3"
-                >
-                  <span class="me-3">
-                    <span class="form-selectgroup-check"></span>
-                  </span>
-                  <span class="form-selectgroup-label-content">
-                    <span class="form-selectgroup-title strong mb-1"
-                      >Advanced</span
-                    >
-                    <span class="d-block text-muted"
-                      >Insert charts and additional advanced analyses to be
-                      inserted in the report</span
-                    >
-                  </span>
-                </span>
-              </label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-8">
-              <div class="mb-3">
-                <label class="form-label">Report url</label>
-                <div class="input-group input-group-flat">
-                  <span class="input-group-text">
-                    https://tabler.io/reports/
-                  </span>
-                  <input
-                    type="text"
-                    class="form-control ps-0"
-                    value="report-01"
-                    autocomplete="off"
-                  />
-                </div>
               </div>
-            </div>
-            <div class="col-lg-4">
               <div class="mb-3">
-                <label class="form-label">Visibility</label>
-                <select class="form-select">
-                  <option value="1" selected>Private</option>
-                  <option value="2">Public</option>
-                  <option value="3">Hidden</option>
-                </select>
+                <label class="form-label">{{
+                  $t("stock.products.modal.product_cost")
+                }}</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  autocomplete="off"
+                  v-model="this.new_product.cost"
+                />
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-lg-6">
               <div class="mb-3">
-                <label class="form-label">product name</label>
-                <input type="text" class="form-control" />
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Reporting period</label>
-                <input type="date" class="form-control" />
-              </div>
-            </div>
-            <div class="col-lg-12">
-              <div>
-                <label class="form-label">Additional information</label>
-                <textarea class="form-control" rows="3"></textarea>
+                <label class="form-label">{{
+                  $t("stock.products.modal.product_stock")
+                }}</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  autocomplete="off"
+                  v-model="this.new_product.stock"
+                />
               </div>
             </div>
           </div>
@@ -615,7 +347,12 @@ style="background-image: url(./static/avatars/008f.jpg)"&gt;&lt;/span&gt;'
           >
             Cancel
           </a>
-          <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+          <a
+            href="#"
+            class="btn btn-primary ms-auto"
+            data-bs-dismiss="modal"
+            @click="this.postProduct(new_product)"
+          >
             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -633,7 +370,7 @@ style="background-image: url(./static/avatars/008f.jpg)"&gt;&lt;/span&gt;'
               <line x1="12" y1="5" x2="12" y2="19" />
               <line x1="5" y1="12" x2="19" y2="12" />
             </svg>
-            Create new report
+            {{ $t("stock.products.create_product") }}
           </a>
         </div>
       </div>
@@ -730,10 +467,7 @@ style="background-image: url(./static/avatars/008f.jpg)"&gt;&lt;/span&gt;'
             class="btn btn-primary ms-auto"
             data-bs-dismiss="modal"
             @click="postProduct(new_product)"
-            :disabled="
-              !new_product.company ||
-              !new_product.short_name
-            "
+            :disabled="!new_product.company || !new_product.short_name"
           >
             Save
           </button>
@@ -742,23 +476,36 @@ style="background-image: url(./static/avatars/008f.jpg)"&gt;&lt;/span&gt;'
     </div>
   </div>
 </template>
-
 <script>
-import { mapGetters } from 'vuex';
-import {
-  loadRecords,
-  createRecord,
-  deleteRecord,
-} from '@/services/modela';
+/* <label class="form-label">client</label>
+                <select
+                  class="form-select"
+                  placeholder="Select a date"
+                  id="select-people"
+                  value=""
+                  v-model="this.new_invoice.client_id"
+                >
+                  <option v-for="client in ClientGetter" :key="client.id"
+                    :value="client.id"
+                    data-custom-properties=
+'&lt;span class="avatar avatar-xs"
+style="background-image: url(./static/avatars/000m.jpg)"&gt;&lt;/span&gt;'
+                  >
+                    {{ client.company }}
+                  </option>
+                </select>
+                */
+import { mapGetters } from "vuex";
+import { loadRecords, createRecord, deleteRecord } from "@/services/model";
 
 export default {
   data() {
     return {
       new_product: {
-        id: '',
-        company: '',
-        short_name: '',
-        active: 1,
+        name: null,
+        salesPrice: null,
+        cost: null,
+        stock: null,
       },
     };
   },
@@ -766,22 +513,22 @@ export default {
     this.loadProduct();
   },
   computed: {
-    ...mapGetters('Stock', [
-      'ProductGetter', // -> this.someGetter
+    ...mapGetters("Stock", [
+      "ProductGetter", // -> this.someGetter
     ]),
   },
   methods: {
     loadClient() {
-      loadRecords('Stock', 'product');
+      loadRecords("Stock", "product");
     },
     loadProduct() {
-      loadRecords('Stock', 'product');
+      loadRecords("Stock", "product");
     },
     postProduct(product) {
-      createRecord('Stock', 'product', product);
+      createRecord("Stock", "product", product);
     },
     deleteProductt(product) {
-      deleteRecord('Stock', 'product', product);
+      deleteRecord("Stock", "product", product);
     },
   },
 };

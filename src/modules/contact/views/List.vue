@@ -40,7 +40,8 @@
                   <line x1="12" y1="5" x2="12" y2="19" />
                   <line x1="5" y1="12" x2="19" y2="12" />
                 </svg>
-                {{ $t("sales.invoices.create_invoice") }}
+                {{ $t("contacts.contacts.create_contact") }}
+                <!-- {{ $t("sales.invoices.create_invoice") }}-->
               </a>
               <a
                 href="#"
@@ -149,7 +150,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="inv in ContactGetter" :key="inv.id">
+                    <tr v-for="inv in ContactGetter" :key="inv._id">
                       <td>
                         <input
                           class="form-check-input m-0 align-middle"
@@ -158,11 +159,11 @@
                         />
                       </td>
                       <td>
-                        <span class="text-muted">{{ inv.id }}</span>
+                        <span class="text-muted">{{ inv._id }}</span>
                       </td>
                       <td>
                         <router-link
-                          :to="{ name: 'Contacts', params: {id: inv.id } }"
+                          :to="{ name: 'Contacts', params: { id: inv._id } }"
                           class="text-reset"
                           tabindex="-1"
                           >{{ inv.name }}</router-link
@@ -189,7 +190,7 @@
                             <a class="dropdown-item" href="#"> Duzenle </a>
                             <a
                               class="dropdown-item"
-                              @click="deleteContact(inv.id)"
+                              @click="this.deleteContact(inv._id)"
                             >
                               Sil
                             </a>
@@ -279,7 +280,9 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">{{ $t("sales.invoices.modal.new_invoice") }}</h5>
+          <h5 class="modal-title">
+            {{ $t("contacts.contacts.modal.new_contact") }}
+          </h5>
           <button
             type="button"
             class="btn-close"
@@ -288,166 +291,83 @@
           ></button>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="mb-3">
-                <label class="form-label">{{ $t("sales.invoices.modal.invoice_title") }}</label>
-                <input type="text" class="form-control" />
+           <fieldset class="form-fieldset">
+            <div class="mb-3">
+              <label class="form-label required">{{
+                $t("contacts.contacts.modal.contact_name")
+              }}</label>
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                v-model="this.new_contact.name"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label required">{{
+                $t("contacts.contacts.modal.contact_email")
+              }}</label>
+              <input
+                type="text"
+                class="form-control"
+                autocomplete="off"
+                v-model="this.new_contact.email"
+              />
               </div>
+                <div class="mb-3">
+              <label class="form-label"> {{ $t("contacts.contacts.modal.contact_phone") }}</label>
+              <input type="text"
+                  class="form-control"
+                  data-mask="(00) 0000-0000"
+                  data-mask-visible="true"
+                  placeholder="(00) 0000-0000"
+                  autocomplete="off"  v-model="this.new_contact.phone" />
             </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">client</label>
-              </div>
+
+             </fieldset>
+               <strong >ADRES</strong>
+                 <fieldset class="form-fieldset">
+            <div class="mb-3">
+               <div class="form-group mb-3 ">
+                 <label class="form-label required">{{
+                $t("contacts.contacts.modal.contact_adress.country")
+              }}</label>
+              <input
+                type="email"
+                class="form-control"
+                autocomplete="off"
+                v-model="this.new_contact.address.country"
+              />
+                <label class="form-label required">{{
+                $t("contacts.contacts.modal.contact_adress.town")
+              }}</label>
+              <input
+                type="email"
+                class="form-control"
+                autocomplete="off"
+                v-model="this.new_contact.address.town"
+              />
+                  <label class="form-label required">{{
+                $t("contacts.contacts.modal.contact_adress.city")
+              }}</label>
+              <input
+                type="email"
+                class="form-control"
+                autocomplete="off"
+                v-model="this.new_contact.address.city"
+              />
+              <label class="form-label required">{{
+                $t("contacts.contacts.modal.contact_adress.street")
+              }}</label>
+              <input
+                type="email"
+                class="form-control"
+                autocomplete="off"
+                v-model="this.new_contact.address.street"
+              />
             </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">contact address</label>
-                <input type="date" class="form-control" />
-              </div>
             </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">delivery address</label>
-                <input type="date" class="form-control" />
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">exp</label>
-                <input type="date" class="form-control" />
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">pricelist</label>
-                <input type="date" class="form-control" />
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">payment term</label>
-                <input type="date" class="form-control" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label class="form-label">Fatura Basligi</label>
-            <input
-              type="text"
-              class="form-control"
-              name="example-text-input"
-              placeholder="Your report name"
-              v-model="new_contact.title"
-            />
-          </div>
-          <label class="form-label">Report type</label>
-          <div class="form-selectgroup-boxes row mb-3">
-            <div class="col-lg-6">
-              <label class="form-selectgroup-item">
-                <input
-                  type="radio"
-                  name="report-type"
-                  value="1"
-                  class="form-selectgroup-input"
-                  checked
-                />
-                <span
-                  class="form-selectgroup-label d-flex align-items-center p-3"
-                >
-                  <span class="me-3">
-                    <span class="form-selectgroup-check"></span>
-                  </span>
-                  <span class="form-selectgroup-label-content">
-                    <span class="form-selectgroup-title strong mb-1"
-                      >Simple</span
-                    >
-                    <span class="d-block text-muted"
-                      >Provide only basic data needed for the report</span
-                    >
-                  </span>
-                </span>
-              </label>
-            </div>
-            <div class="col-lg-6">
-              <label class="form-selectgroup-item">
-                <input
-                  type="radio"
-                  name="report-type"
-                  value="1"
-                  class="form-selectgroup-input"
-                />
-                <span
-                  class="form-selectgroup-label d-flex align-items-center p-3"
-                >
-                  <span class="me-3">
-                    <span class="form-selectgroup-check"></span>
-                  </span>
-                  <span class="form-selectgroup-label-content">
-                    <span class="form-selectgroup-title strong mb-1"
-                      >Advanced</span
-                    >
-                    <span class="d-block text-muted"
-                      >Insert charts and additional advanced analyses to be
-                      inserted in the report</span
-                    >
-                  </span>
-                </span>
-              </label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-8">
-              <div class="mb-3">
-                <label class="form-label">Report url</label>
-                <div class="input-group input-group-flat">
-                  <span class="input-group-text">
-                    https://tabler.io/reports/
-                  </span>
-                  <input
-                    type="text"
-                    class="form-control ps-0"
-                    value="report-01"
-                    autocomplete="off"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="mb-3">
-                <label class="form-label">Visibility</label>
-                <select class="form-select">
-                  <option value="1" selected>Private</option>
-                  <option value="2">Public</option>
-                  <option value="3">Hidden</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Client name</label>
-                <input type="text" class="form-control" />
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Reporting period</label>
-                <input type="date" class="form-control" />
-              </div>
-            </div>
-            <div class="col-lg-12">
-              <div>
-                <label class="form-label">Additional information</label>
-                <textarea class="form-control" rows="3"></textarea>
-              </div>
-            </div>
-          </div>
+          </fieldset>
         </div>
         <div class="modal-footer">
           <a
@@ -457,7 +377,12 @@
           >
             Cancel
           </a>
-          <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+          <a
+            href="#"
+            class="btn btn-primary ms-auto"
+            data-bs-dismiss="modal"
+            @click="this.postContact(new_contact)"
+          >
             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -475,34 +400,37 @@
               <line x1="12" y1="5" x2="12" y2="19" />
               <line x1="5" y1="12" x2="19" y2="12" />
             </svg>
-            Create new report
+            {{ $t("contacts.contacts.create_contact") }}
           </a>
         </div>
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import {
-  loadRecords,
-  createRecord,
-  deleteRecord,
-} from '@/services/modela';
+import { mapGetters } from "vuex";
+import { loadRecords, createRecord, deleteRecord } from "@/services/model";
 
 export default {
   data() {
     return {
       new_contact: {
-        id: '',
-        name: '',
-        job_title: '',
-        pay_rate: '',
-        active: 1,
+        name: null,
+        email: null,
+        jobPosition: null,
+        phone: null,
+        website: null,
+        address: {
+          street: " ",
+          town: " ",
+          city: " ",
+          country: "",
+        },
       },
       selected: {
-        company: 'aa',
+        company: "aa",
       },
     };
   },
@@ -510,19 +438,19 @@ export default {
     this.loadContacts();
   },
   computed: {
-    ...mapGetters('Contact', [
-      'ContactGetter', // -> this.someGetter
+    ...mapGetters("Contact", [
+      "ContactGetter", // -> this.someGetter
     ]),
   },
   methods: {
     loadContacts() {
-      loadRecords('Contact', 'contact');
+      loadRecords("Contact", "contact");
     },
     postContact(contact) {
-      createRecord('Contact', 'contact', contact);
+      createRecord("Contact", "contact", contact);
     },
     deleteContact(contact) {
-      deleteRecord('Contact', 'contact', contact);
+      deleteRecord("Contact", "contact", contact);
     },
   },
 };
