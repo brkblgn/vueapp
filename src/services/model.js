@@ -3,44 +3,44 @@ import store from '@/store';
 import { toTitle } from '@/utils/case';
 
 const API_URL2 = 'http://bb.linux.com.tr:3000';
-export function loadRecords(ns, model) {
-  console.log(ns)
+export function loadRecords(module, model) {
+  console.log(module)
   const optionAxios = {
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
   };
   try {
-    axios.get(`${API_URL2}/${model}s`, optionAxios)
+    axios.get(`${API_URL2}/${module}s/${model}`, optionAxios)
       .then((response) => {
-        store.commit(`${toTitle(ns)}/SET_${model.toUpperCase()}S`, response.data);
+        store.commit(`${toTitle(module)}s/SET_${model.toUpperCase()}S`, response.data);
         const stringData = JSON.stringify(response.data);
-        window.localStorage.setItem(`${toTitle(model)}s`, stringData);
+        window.localStorage.setItem(`${toTitle(module)}s.${toTitle(model)}`, stringData);
       });
   } catch (err) {
     console.log(err);
   }
 }
 
-export function loadRecord(ns, model) {
+export function loadRecord(module, model) {
   const optionAxios = {
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
   };
   try {
-    axios.get(`${API_URL2}/${model}s`, optionAxios)
+    axios.get(`${API_URL2}/${module}s/${model}`, optionAxios)
       .then((response) => {
-        store.commit(`${toTitle(ns)}/SET_${model.toUpperCase()}S`, response.data);
+        store.commit(`${toTitle(module)}/SET_${model.toUpperCase()}S`, response.data);
         const stringData = JSON.stringify(response.data);
-        window.localStorage.setItem(`${toTitle(model)}s`, stringData);
+        window.localStorage.setItem(`${toTitle(module)}s.${toTitle(model)}`, stringData);
       });
   } catch (err) {
     console.log(err);
   }
 }
 
-export function createRecord(ns, model, record) {
+export function createRecord(module, model, record) {
   const optionAxios = {
     headers: {
       'Access-Control-Allow-Origin': '*',
@@ -49,15 +49,15 @@ export function createRecord(ns, model, record) {
 
   try {
     console.log(record);
-    axios.post(`${API_URL2}/${model}s`, record, optionAxios)
+    axios.post(`${API_URL2}/${module}s/${model}`, record, optionAxios)
       .then(() => {
-        store.commit(`${toTitle(ns)}/CREATE_${model.toUpperCase()}`, record);
+        store.commit(`${toTitle(module)}/CREATE_${model.toUpperCase()}`, record);
        // console.log(record)
-        axios.get(`${API_URL2}/${model}s`)
+        axios.get(`${API_URL2}/${module}s/${model}`)
           .then((response) => {
-            store.commit(`${ns}/SET_${model.toUpperCase()}S`, response.data);
+            store.commit(`${module}/SET_${model.toUpperCase()}S`, response.data);
             const stringData = JSON.stringify(response.data);
-            window.localStorage.setItem(`${toTitle(model)}s`, stringData);
+            window.localStorage.setItem(`${toTitle(module)}s.${toTitle(model)}`, stringData);
           });
       })
       .catch((error) => {
@@ -70,7 +70,7 @@ export function createRecord(ns, model, record) {
   }
 }
 
-export function deleteRecord(ns, model, recordID) {
+export function deleteRecord(module, model, recordID) {
   const optionAxios = {
     headers: {
       'Access-Control-Allow-Origin': '*',
@@ -78,10 +78,10 @@ export function deleteRecord(ns, model, recordID) {
   };
   if (navigator.onLine) {
     try {
-      axios.delete(`${API_URL2}/${model}s/${recordID}`, optionAxios)
+      axios.delete(`${API_URL2}/${module}s/${model}`, optionAxios)
         .then(() => {
           console.log(recordID)
-          store.commit(`${ns}/DELETE_${model.toUpperCase()}`, recordID);
+          store.commit(`${module}/DELETE_${model.toUpperCase()}`, recordID);
         });
     } catch (err) {
       console.log(err);
