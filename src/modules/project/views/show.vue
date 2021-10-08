@@ -6,15 +6,15 @@
         <div class="row align-items-center">
           <div class="col">
             <!-- Page pre-title -->
-    <div class="page-pretitle">{{ $t("contacts.title") }}</div>
-            <h2 class="page-title">{{ $t("contacts.title") }}</h2>
+    <div class="page-pretitle">{{ $t("projects.title") }}</div>
+            <h2 class="page-title">{{ $t("projects.title") }}</h2>
           </div>
           <!-- Page title actions -->
           <div class="col-auto ms-auto d-print-none">
             <div class="btn-list">
               <span class="d-none d-sm-inline">
                 <a href="#" class="btn btn-white">
-                  {{ $t("contacts.contacts.create_report") }}
+                  {{ $t("projects.projects.create_report") }}
                 </a>
               </span>
               <a
@@ -40,7 +40,7 @@
                   <line x1="12" y1="5" x2="12" y2="19" />
                   <line x1="5" y1="12" x2="19" y2="12" />
                 </svg>
-                {{ $t("contacts.contacts.create_contact") }}
+                {{ $t("projects.projects.create_project") }}
               </a>
               <a
                 href="#"
@@ -78,7 +78,7 @@
           <div class="col-6">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">{{ contact?.name }}</h3>
+                <h3 class="card-title">{{ project?.name }}</h3>
                 <div class="card-actions">
                   <a href="#">
                     Edit configuration<!-- Download SVG icon from http://tabler-icons.io/i/edit -->
@@ -109,21 +109,12 @@
               <div class="card-body">
                 <dl class="row">
                   <dt class="col-5">ID:</dt>
-                  <dd class="col-7">{{ contact?._id }} </dd>
-                  <dt class="col-5">Name:</dt>
-                  <dd class="col-7">{{ contact?.name }}</dd>
-                  <dt class="col-5">Location:</dt>
-                  <dd class="col-7">
-                    <span class="flag flag-country-tr"></span> Turkey
-                  </dd>
-                  <dt class="col-5">E-mail:</dt>
-                  <dd class="col-7">{{ contact?.email }}</dd>
-                  <dt class="col-5">Telephone:</dt>
-                  <dd class="col-7">{{ contact?.phone }}</dd>
-                  <dt class="col-5"> Mobile:</dt>
-                  <dd class="col-7">{{ contact?.mobile }}</dd>
-                  <dt class="col-5">Address:</dt>
-                  <dd class="col-7">{{contact?.address.street}} {{contact?.address.town}} {{contact?.address.city}} {{contact?.address.country}}</dd>
+                  <dd class="col-7">{{ project?._id }} </dd>
+                  <dt class="col-5">{{ $t("projects.projects.project_name") }}</dt>
+                  <dd class="col-7">{{ project?.name }}</dd>
+                  <dt class="col-5">{{ $t("projects.projects.project_members") }}</dt>
+                  <dd class="col-7">{{ project?.members }}</dd>
+
                 </dl>
               </div>
             </div>
@@ -145,12 +136,9 @@ import {
 export default {
   data() {
     return {
-      new_contact: {
+      new_project: {
         id: '',
         name: '',
-        job_title: '',
-        pay_rate: '',
-        active: 1,
       },
       selected: {
         company: 'aa',
@@ -158,34 +146,44 @@ export default {
     };
   },
   mounted() {
+    this.loadProjects();
     this.loadContacts();
   },
   computed: {
-    ...mapGetters('Contact', [
-      'ContactGetter', // -> this.someGetter
+    ...mapGetters('Project', [
+      'ProjectGetter', // -> this.someGetter
     ]),
+      ...mapGetters('Contact', [
+      'ContactGetter',
+    ]),
+    projects() {
+      return this.ProjectGetter;
+    },
     contacts() {
       return this.ContactGetter;
     },
-    contact: {
+    project: {
       get() {
         const idd = this.$route.params.id;
         console.log(this.$route.params.id)
         console.log(Number(this.$route.params.id))
         // return idd ? this.contacts.filter((contact) => (contact)._id === idd) : {};
-        return idd ? this.contacts.find((contact) => (contact)._id === idd) : {};
-        },
+        return idd ? this.projects.find((project) => (project)._id === idd) : {};
+      },
     },
   },
   methods: {
+    loadProjects() {
+      loadRecords('project', 'project');
+    },
+    postProject(project) {
+      createRecord('project', 'project', project);
+    },
     loadContacts() {
-      loadRecords('contact', 'contact');
+      loadRecords("Contact", "contact");
     },
-    postContact(contact) {
-      createRecord('contact', 'contact', contact);
-    },
-    deleteContact(contact) {
-      deleteRecord('contact', 'contact', contact);
+    deleteProject(project) {
+      deleteRecord('project', 'project', project);
     },
   },
 };

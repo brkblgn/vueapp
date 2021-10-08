@@ -450,7 +450,7 @@ export default {
       createRecord("Contact", "contact", contact);
     },
     deleteContact(contact) {
-      deleteRecord("Contact", "contact", contact);
+      deleteRecord("contact", "contact", contact);
     },
   },
 };

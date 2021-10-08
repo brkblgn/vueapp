@@ -373,6 +373,7 @@
             </router-link>
           </div>
           <div class="col-sm-6 col-md-6 col-xl-3">
+            <router-link class="card card-link" to="/projects">
             <a class="card card-link" href="#">
               <div class="card-body">
                 <div class="row">
@@ -412,6 +413,7 @@
                 </div>
               </div>
             </a>
+            </router-link>
           </div>
 
           <div class="col-md-8">

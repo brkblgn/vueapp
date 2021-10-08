@@ -121,7 +121,7 @@
                         />
                       </th>
                       <th class="w-1">
-                        No.
+                      {{ $t("sales.table.products.product_name") }}
                         <!-- Download SVG icon from http://tabler-icons.io/i/chevron-up -->
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -139,17 +139,17 @@
                           <polyline points="6 15 12 9 18 15" />
                         </svg>
                       </th>
-                      <th>product Subject</th>
-                      <th>{{ $t("sales.invoices.table.client") }}</th>
-                      <th>VAT No.</th>
-                      <th>{{ $t("sales.invoices.table.created_at") }}</th>
+                      <th> {{ $t("sales.table.products.product_id") }}</th>
+                      <th></th>
+                      <th></th>
+                      <th>{{ $t("sales.table.products.product_salesPrice") }}</th>
                       <th>Status</th>
-                      <th>{{ $t("sales.invoices.table.price") }}</th>
+                      <th>{{ $t("sales.table.products.product_cost") }}</th>
                       <th></th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="inv in ProductGetter" :key="inv.id">
+                    <tr v-for="inv in ProductGetter" :key="inv._id">
                       <td>
                         <input
                           class="form-check-input m-0 align-middle"
@@ -158,14 +158,14 @@
                         />
                       </td>
                       <td>
-                        <span class="text-muted">{{ inv.company }}</span>
+                        <span class="text-muted">{{ inv.name }}</span>
                       </td>
                       <td>
                         <a
                           href="invoice.html"
                           class="text-reset"
                           tabindex="-1"
-                          >{{ inv.company }}</a
+                          >{{ inv._id }}</a
                         >
                       </td>
                       <td>
@@ -173,9 +173,9 @@
                         {{ inv.client_id }}
                       </td>
                       <td>87956621</td>
-                      <td>{{ inv.company }}</td>
+                      <td>{{ inv.salesPrice }}</td>
                       <td><span class="badge bg-success me-1"></span> Paid</td>
-                      <td>{{ inv.company }} {{ inv.short_name }}</td>
+                      <td>{{ inv.cost}}</td>
                       <td class="text-end">
                         <span class="dropdown">
                           <button
@@ -189,7 +189,7 @@
                             <a class="dropdown-item" href="#"> Duzenle </a>
                             <a
                               class="dropdown-item"
-                              @click="deleteProductt(inv.id)"
+                              @click="deleteProductt(inv._id)"
                             >
                               Sil
                             </a>
@@ -466,8 +466,8 @@
             type="button"
             class="btn btn-primary ms-auto"
             data-bs-dismiss="modal"
-            @click="postProduct(new_product)"
-            :disabled="!new_product.company || !new_product.short_name"
+            @click="this.postProduct(new_product)"
+            :disabled="!new_product.name ||!new_product.salesPrice"
           >
             Save
           </button>
@@ -513,22 +513,22 @@ export default {
     this.loadProduct();
   },
   computed: {
-    ...mapGetters("Stock", [
-      "ProductGetter", // -> this.someGetter
+    ...mapGetters("Sale", [
+      "ProductGetter", // -> this.someGetters
     ]),
   },
   methods: {
     loadClient() {
-      loadRecords("Stock", "product");
+      loadRecords("Sale", "product");
     },
     loadProduct() {
-      loadRecords("Stock", "product");
+      loadRecords("Sale", "product");
     },
     postProduct(product) {
-      createRecord("Stock", "product", product);
+      createRecord("Sale", "product", product);
     },
     deleteProductt(product) {
-      deleteRecord("Stock", "product", product);
+      deleteRecord("Sale", "product", product);
     },
   },
 };

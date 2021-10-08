@@ -32,9 +32,8 @@
                 "new_product": "Ürün Ekle",
                 "product_name": "Ürün Adı",
                 "product_salesPrice": "Satış Fiyatı",
-                "product_cost":"Ürün Alış Fiyatı",
-                "product_stock":"Stok Miktarı"
-
+                "product_cost": "Ürün Alış Fiyatı",
+                "product_stock": "Stok Miktarı"
             }
         }
     },
@@ -48,7 +47,7 @@
                 "new_contact": "Kontak Oluştur",
                 "contact_name": "Ad ve Soyad",
                 "contact_email": "Eposta",
-                "contact_phone":"Phone number",
+                "contact_phone": "Phone number",
                 "contact_adress": {
                     "street": "Sokak",
                     "town": "Şehir/Town",
@@ -81,7 +80,29 @@
             }
         },
         "table": {
-            "products": "Urunler"
+            "products": {
+                "product_name": "Ürün Adı",
+                "product_id": "Ürün ID",
+                "product_salesPrice": "Satış Fiyatı",
+                "product_cost": "Ürün Alış Fiyatı",
+                "product_stock": "Stok Miktarı"
+            }
+        }
+    },
+    "projects":{
+        "title": "Projeler",
+        "projects": {
+            "create_report": "Proje Raporu Olustur",
+            "create_project": "Proje Oluştur",
+             "project_name": "Proje Adı",
+             "project_members": "Proje Üyeleri",
+            "modal": {
+                "new_project": "Proje Oluştur",
+                "project_name": "Proje Adı",
+                "project_members": "Proje Üyeleri",
+                "project_created_date": "Proje Oluşturulma Tarihi",
+                "project_updated_date": "Proje Güncelleme Tarihi"
+            }
         }
     }
 }

@@ -20,15 +20,15 @@ const mutations = {
   SET_CONTACTS(state, data) {
     state.contacts = data;
   },
-  UPDATE_CONTACT(state, contact) {
+  UPDATE_CONTACTS(state, contact) {
     const index = state.contacts.findIndex((inv) => (inv)._id === contact.id);
     return state.contacts.splice(index, 1, contact);
   },
-  CREATE_CONTACT(state, contact) {
+  CREATE_CONTACTS(state, contact) {
     return state.contacts.push(contact);
   },
   DELETE_CONTACT(state, id) {
-    const index = state.contacts.findIndex((inv) => (inv)._id === id);
+  const index = state.contacts.findIndex((inv) => (inv)._id === id);
     return state.contacts.splice(index, 1);
   },
 };

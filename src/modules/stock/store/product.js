@@ -24,10 +24,10 @@ const mutations = {
     const index = state.products.findIndex((inv) => (inv).id === product.id);
     return state.products.splice(index, 1, product);
   },
-  CREATE_PRODUCT(state, product) {
+  CREATE_PRODUCTS(state, product) {
     return state.products.push(product);
   },
-  DELETE_PRODUCT(state, id) {
+  DELETE_PRODUCTS(state, id) {
     const index = state.products.findIndex((inv) => (inv).id === id);
     return state.products.splice(index, 1);
   },
