@@ -1,4 +1,5 @@
 // initial state
+/* eslint no-underscore-dangle: 0 */
 const state = () => ({
   products: [],
 });
@@ -28,7 +29,9 @@ const mutations = {
     return state.products.push(product);
   },
   DELETE_PRODUCTS(state, id) {
-    const index = state.products.findIndex((inv) => (inv).id === id);
+    console.log(id)
+    const index = state.products.findIndex((inv) => (inv._id) === id);
+    console.log(index)
     return state.products.splice(index, 1);
   },
 };
