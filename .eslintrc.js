@@ -17,7 +17,8 @@ module.exports = {
     "semi": 0,
     'max-len': 'off',
     "quotes": [0, "double"],
-    "space-before-function-paren": "error"
+    "space-before-function-paren": "error",
+    'no-plusplus': 0
   },
   overrides: [
     {

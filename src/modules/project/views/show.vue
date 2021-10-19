@@ -6,7 +6,7 @@
         <div class="row align-items-center">
           <div class="col">
             <!-- Page pre-title -->
-    <div class="page-pretitle">{{ $t("projects.title") }}</div>
+            <div class="page-pretitle">{{ $t("projects.title") }}</div>
             <h2 class="page-title">{{ $t("projects.title") }}</h2>
           </div>
           <!-- Page title actions -->
@@ -109,13 +109,57 @@
               <div class="card-body">
                 <dl class="row">
                   <dt class="col-5">ID:</dt>
-                  <dd class="col-7">{{ project?._id }} </dd>
-                  <dt class="col-5">{{ $t("projects.projects.project_name") }}</dt>
+                  <dd class="col-7">{{ project?._id }}</dd>
+                  <dt class="col-5">
+                    {{ $t("projects.projects.project_name") }}
+                  </dt>
                   <dd class="col-7">{{ project?.name }}</dd>
-                  <dt class="col-5">{{ $t("projects.projects.project_members") }}</dt>
-                  <dd class="col-7">{{ project?.members }}</dd>
-
+                  <dt class="col-5">
+                    {{ $t("projects.projects.project_members") }}
+                  </dt>
+                  <!------    <dd class="col-7">
+                    <span>{{ project?.members.length }}</span>
+                    <span>{{ project?.members }}</span>
+                    <span>{{ project?.members[0] }}</span>
+                    <tr v-for="inv in ContactGetter" :key="inv._id">
+                       <tr v-for="i in project?.members.length - 1" :key="i">
+                      <td v-if="inv._id == project?.members[i]">
+                        <span>{{ inv.name }}</span>
+                      </td>
+                    </tr>
+                    <tr v-for="inv in ContactGetter" :key="inv._id">
+                      <span>{{ project?.members.forEach(memberss) }}</span>
+                      <td v-if="inv._id == project?.members.forEach(memberss)">
+                        <span>{{ inv.name }}</span>
+                      </td>
+                    </tr>
+                  </dd>
+                 <dd class="col-7">
+                    <span>{{ project?.members.length }}</span>
+                    <span>{{ project?.members }}</span>
+                    <tr v-for="inv in ContactGetter" :key="inv._id">
+                      <span>{{ project?.members.forEach(memberss) }}</span>
+                      <td v-if="project?.members.filter((p) => p._id === inv._id)">
+                        <span>{{ inv.name }}</span>
+                      </td>
+                    </tr>
+                  </dd>
+                       <tr v-for="inv in ContactGetter" :key="inv._id">
+                      <td>
+                        <span class="text-muted">{{ inv._id }}</span>
+                      </td>
+                       </tr>
+                        <dd v-for="a in ContactGetter"  :key="a._id">
+                    {{ memberss?.name (a._id) }}</dd>
                 </dl>
+                    <dd v-for="a in ContactGetter"  :key="a._id">
+                    {{ memberss?.name(a._id)}}
+                    </dd>
+                      ---------------->
+                     <tr v-for="i in project?.members.length" :key="i">
+                  <dd class="col-7" v-if="project?.members[i - 1] !== null">{{ memberss(project?.members[i - 1]).name }}</dd>
+                     </tr>
+                  </dl>
               </div>
             </div>
           </div>
@@ -124,24 +168,21 @@
     </div>
   </div>
 </template>
-
 <script>
-  /* eslint no-underscore-dangle: 0 */
+/* eslint no-underscore-dangle: 0 */
 /* eslint "no-trailing-spaces": ["warn", {"skipBlankLines": true}] */
-import { mapGetters } from 'vuex';
-import {
-  loadRecords, createRecord, deleteRecord,
-} from '@/services/model';
+import { mapGetters } from "vuex";
+import { loadRecords, createRecord, deleteRecord } from "@/services/model";
 
 export default {
   data() {
     return {
       new_project: {
-        id: '',
-        name: '',
+        id: "",
+        name: "",
       },
       selected: {
-        company: 'aa',
+        company: "aa",
       },
     };
   },
@@ -150,12 +191,10 @@ export default {
     this.loadContacts();
   },
   computed: {
-    ...mapGetters('Project', [
-      'ProjectGetter', // -> this.someGetter
+    ...mapGetters("Project", [
+      "ProjectGetter", // -> this.someGetter
     ]),
-      ...mapGetters('Contact', [
-      'ContactGetter',
-    ]),
+    ...mapGetters("Contact", ["ContactGetter"]),
     projects() {
       return this.ProjectGetter;
     },
@@ -165,25 +204,28 @@ export default {
     project: {
       get() {
         const idd = this.$route.params.id;
-        console.log(this.$route.params.id)
-        console.log(Number(this.$route.params.id))
-        // return idd ? this.contacts.filter((contact) => (contact)._id === idd) : {};
-        return idd ? this.projects.find((project) => (project)._id === idd) : {};
+        console.log(this.$route.params.id);
+        console.log(Number(this.$route.params.id));
+        return idd ? this.projects.find((project) => project._id === idd) : {};
       },
     },
   },
   methods: {
     loadProjects() {
-      loadRecords('project', 'project');
+      loadRecords("project", "project");
     },
     postProject(project) {
-      createRecord('project', 'project', project);
+      createRecord("project", "project", project);
     },
     loadContacts() {
       loadRecords("Contact", "contact");
     },
     deleteProject(project) {
-      deleteRecord('project', 'project', project);
+      deleteRecord("project", "project", project);
+    },
+    memberss(idd) {
+      console.log(idd);
+      return this.contacts.find((contacts) => contacts._id === idd);
     },
   },
 };

@@ -7,14 +7,14 @@
           <div class="col">
             <!-- Page pre-title -->
             <div class="page-pretitle">{{ $t("sales.sales") }}</div>  <!-- Satislar -->
-            <h2 class="page-title">{{ $t("sales.invoices.invoices") }}</h2> <!-- Faturalar -->
+            <h2 class="page-title">{{ $ in t("sales.invoices.invoices") }}</h2> <!-- Faturalar -->
           </div>
           <!-- Page title actions -->
           <div class="col-auto ms-auto d-print-none">
             <div class="btn-list">
               <span class="d-none d-sm-inline">
                 <a href="#" class="btn btn-white">
-                  {{ $t("sales.invoices.create_report") }} <!-- "Satis Raporu Olustur", -->
+                   {{ $t("sales.invoices.create_report") }} <!-- "Satis Raporu Olustur", -->
                 </a>
               </span>
               <a

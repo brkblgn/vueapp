@@ -141,10 +141,16 @@
                         </svg>
                       </th>
                       <th>{{ $t("projects.projects.modal.project_name") }}</th>
-                      <th>{{ $t("projects.projects.modal.project_members") }}</th>
+                      <th>
+                        {{ $t("projects.projects.modal.project_members") }}
+                      </th>
                       <th>VAT No.</th>
-                      <th>{{ $t("projects.projects.modal.project_created_date") }}</th>
-                      <th>{{ $t("projects.projects.modal.project_members") }}</th>
+                      <th>
+                        {{ $t("projects.projects.modal.project_created_date") }}
+                      </th>
+                      <th>
+                        {{ $t("projects.projects.modal.project_members") }}
+                      </th>
                       <th></th>
                       <th></th>
                     </tr>
@@ -172,7 +178,7 @@
                       <td>
                         <span class="flag flag-country-us"></span>
                       </td>
-                       <td></td>
+                      <td></td>
                       <td>{{ inv.createdAt }}</td>
                       <td><span class="badge bg-success me-1"></span></td>
                       <td></td>
@@ -268,7 +274,6 @@
       </div>
     </div>
   </div>
-
   <div
     class="modal modal-blur fade"
     id="modal-report"
@@ -290,7 +295,7 @@
           ></button>
         </div>
         <div class="modal-body">
-           <fieldset class="form-fieldset">
+          <fieldset class="form-fieldset">
             <div class="mb-3">
               <label class="form-label required">{{
                 $t("projects.projects.modal.project_name")
@@ -302,22 +307,39 @@
                 v-model="this.new_project.name"
               />
             </div>
-    <div class="mb-3">
-                <label class="form-label">{{$t("projects.projects.modal.project_members")}}</label>
-                <select
-                  class="form-select"
-                  placeholder="Select a date"
-                  id="select-people"
-                  value=""
-                  v-model="this.new_project.members"
+            <div class="mb-3">
+              <label class="form-label">{{
+                $t("projects.projects.modal.project_members")
+              }}</label>
+              <select
+                multiple
+                class="vs__dropdown-toggle"
+                :taggable="true"
+                v-bind:class="{ 'fix-height': multiple === 'true' }"
+                placeholder="Select a name"
+                v-model="this.new_project.members"
+                @tag="addTag"
+              >
+                <option
+                  v-for="contact in ContactGetter"
+                  :key="contact._id"
+                  :value="contact._id"
+                  :option="contact._id"
+                  @click="this.AddMultiselect(contact._id)"
                 >
-                  <option v-for="contact in ContactGetter" :key="contact._id"
-                    :value="contact._id">
-                    {{ contact.name }}
-                  </option>
-                </select>
-              </div>
-             </fieldset>
+                  {{ contact.name }}
+                </option>
+              </select>
+              <tr v-for="i in multiselectList.length-1" :key="i">
+             <dd class="col-7" v-if="multiselectList[i] !== null"> Value:{{ memberss(multiselectList[i]).name }}</dd>
+              <!---  {{ this.multiselectList[i] }}---->
+                <button v-on:click="remove(this.multiselectList.[i])">
+                  Delete
+                </button>
+                <br />
+              </tr>
+            </div>
+          </fieldset>
         </div>
         <div class="modal-footer">
           <a
@@ -356,10 +378,9 @@
       </div>
     </div>
   </div>
-
 </template>
-
 <script>
+/* eslint no-underscore-dangle: 0 */
 import { mapGetters } from "vuex";
 import { loadRecords, createRecord, deleteRecord } from "@/services/model";
 
@@ -368,30 +389,34 @@ export default {
     return {
       new_project: {
         name: null,
-        members: null,
+        members: [],
       },
+      multiselectList: [null],
       selected: {
         company: "aa",
       },
     };
   },
+
   mounted() {
     this.loadProjects();
     this.loadContacts();
+    console.log(this.multiselectList.length);
   },
   computed: {
     ...mapGetters("Project", [
       "ProjectGetter", // -> this.someGetter
     ]),
-    ...mapGetters('Contact', [
-      'ContactGetter',
-    ]),
+    ...mapGetters("Contact", ["ContactGetter"]),
+    contacts() {
+      return this.ContactGetter;
+    },
   },
   methods: {
     loadProjects() {
       loadRecords("Project", "project");
     },
-     loadContacts() {
+    loadContacts() {
       loadRecords("Contact", "contact");
     },
     postProject(project) {
@@ -400,6 +425,61 @@ export default {
     deleteProject(project) {
       deleteRecord("project", "project", project);
     },
+      ControlNull() {
+      for (let s = 0; s <= this.multiselectList.length - 1; s++) {
+        console.log(this.multiselectList[s]);
+        if (this.multiselectList[s] === null) {
+        return this.multiselectList.splice(this.multiselectList.indexOf(s), 1);
+        }
+      }
+      return true;
+    },
+
+    remove(i) {
+      console.log("indexOf", this.multiselectList.indexOf(i));
+      this.multiselectList.splice(this.multiselectList.indexOf(i), 1);
+      console.log("removeLength", this.multiselectList.length);
+      console.log(this.multiselectList);
+      this.new_project.members = this.multiselectList;
+      return this.multiselectList;
+    },
+    AddMultiselect(i) {
+      // this.ControlNull()
+      console.log(this.ControlSame(i));
+      if (this.ControlSame(i)) {
+        // this.ControlSame(i);
+        this.multiselectList.push(i);
+      }
+      //  console.log(i);
+      //  console.log("AddLength", this.multiselectList.length);
+      //  console.log(this.multiselectList);
+      this.new_project.members = this.multiselectList;
+      return this.multiselectList;
+      // return this.contacts.find((contacts) => contacts._id === i);
+    },
+    ControlSame(t) {
+      for (let s = 0; s <= this.multiselectList.length - 1; s++) {
+        console.log(this.multiselectList[s]);
+        if (this.multiselectList[s] === t) {
+          return false;
+        }
+      }
+      return true;
+    },
+    MemeberName(t) {
+      for (let s = 0; s <= this.multiselectList.length - 1; s++) {
+        console.log(this.multiselectList[s]);
+        if (this.multiselectList[s] === t) {
+          return false;
+        }
+      }
+      return true;
+    },
+     memberss(t) {
+      console.log(t);
+      return this.contacts.find((contacts) => (contacts._id) === t);
+    },
+
   },
 };
 </script>
