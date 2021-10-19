@@ -27,7 +27,7 @@ const mutations = {
   CREATE_CONTACTS(state, contact) {
     return state.contacts.push(contact);
   },
-  DELETE_CONTACT(state, id) {
+  DELETE_CONTACTS(state, id) {
   const index = state.contacts.findIndex((inv) => (inv)._id === id);
     return state.contacts.splice(index, 1);
   },
