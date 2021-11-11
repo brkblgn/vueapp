@@ -172,7 +172,6 @@ export default {
         const idd = this.$route.params.id;
         console.log(this.$route.params.id)
         console.log(Number(this.$route.params.id))
-        // return idd ? this.contacts.filter((contact) => (contact)._id === idd) : {};
         return idd ? this.contacts.find((contact) => (contact)._id === idd) : {};
         },
     },
@@ -188,5 +187,5 @@ export default {
       deleteRecord('contact', 'contact', contact);
     },
   },
-};
+}
 </script>

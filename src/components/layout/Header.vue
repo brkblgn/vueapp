@@ -88,8 +88,8 @@ d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0
             <a href="#" class="dropdown-item">Profile & account</a>
             <a href="#" class="dropdown-item">Feedback</a>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">Settings</a>
-            <a href="#" class="dropdown-item">Logout</a>
+            <a href="#" class="dropdown-item"  @click= this.fu>Settings</a>
+            <a href="#" class="dropdown-item"  @click="this.destroyToken()">Logout</a>
           </div>
         </div>
       </div>
@@ -105,8 +105,8 @@ d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0
     </div>
   </header>
 </template>
-
 <script>
+// import function from '@/utils/functions'
 export default {
   data() {
     return { langs: ['tr', 'en'] };
@@ -117,5 +117,10 @@ export default {
     },
   },
   props: ['abc'],
+  methods: {
+      destroyToken() {
+      localStorage.removeItem('token')
+      },
+  },
 };
 </script>

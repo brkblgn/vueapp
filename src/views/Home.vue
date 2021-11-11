@@ -49,7 +49,6 @@
                 data-bs-target="#modal-report"
                 aria-label="Create new invoice"
               >
-                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="icon"
@@ -84,7 +83,6 @@
                       class="avatar rounded"
                       style="background-color: smoke"
                     >
-                      <!-- Download SVG icon from http://tabler-icons.io/i/chart-arrows-vertical -->
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         class="icon"

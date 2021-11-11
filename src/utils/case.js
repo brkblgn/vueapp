@@ -33,4 +33,5 @@ export function toSentence(string) {
   const interim = toKebab(string)
     .replace(/-/g, ' ');
   return interim.slice(0, 1).toUpperCase() + interim.slice(1);
+
 }

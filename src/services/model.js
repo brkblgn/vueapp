@@ -2,15 +2,23 @@ import axios from 'axios';
 import store from '@/store';
 import { toTitle } from '@/utils/case';
 
+if (localStorage.getItem("token") == null) {
+  this.$router.push('@/auth/views/auth')
+}
 const API_URL2 = 'http://bb.linux.com.tr:3000';
+
 export function loadRecords(module, model) {
   const optionAxios = {
     headers: {
       'Access-Control-Allow-Origin': '*',
+      // Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjE4Mjc3YzlkNWI2MDk1Nzg1Y2UzNjlkIiwiZW1haWwiOiJ2dnZAaG8iLCJpYXQiOjE2MzU5NDAyOTcsImV4cCI6MTYzNTk0Mzg5N30.vwoNUetB0Aa9ohRaNTEui7X74JkXQaAF1be1CwE4LXE',
+     Authorization: localStorage.getItem("token"),
     },
   };
   console.log("loadRecordsmodule", module)
   console.log("loadRecordsmodel", model)
+console.log(localStorage.getItem("token"))
+
   console.log("loadRecordsmodel", (`${toTitle(module)}s/SET_${model.toUpperCase()}S`))
   try {
     axios.get(`${API_URL2}/${module}s/${model}`, optionAxios)
@@ -27,6 +35,7 @@ export function loadRecord(module, model) {
   const optionAxios = {
     headers: {
       'Access-Control-Allow-Origin': '*',
+      Authorization: localStorage.getItem("token"),
     },
   };
   try {
@@ -44,6 +53,7 @@ export function createRecord(module, model, record) {
   const optionAxios = {
     headers: {
       'Access-Control-Allow-Origin': '*',
+      Authorization: localStorage.getItem("token"),
     },
   };
   try {
@@ -51,7 +61,6 @@ export function createRecord(module, model, record) {
     axios.post(`${API_URL2}/${module}s/${model}`, record, optionAxios)
       .then(() => {
         store.commit(`${toTitle(module)}/CREATE_${model.toUpperCase()}S`, record);
-       // console.log(record)
         axios.get(`${API_URL2}/${module}s/${model}`)
           .then((response) => {
             store.commit(`${module}/SET_${model.toUpperCase()}S`, response.data);
@@ -69,10 +78,10 @@ export function createRecord(module, model, record) {
   }
 }
 export function deleteRecord(module, model, recordID) {
-  // console.log("deleteRecordrecordID", recordID)
   const optionAxios = {
     headers: {
       'Access-Control-Allow-Origin': '*',
+      Authorization: localStorage.getItem("token"),
     },
   };
   if (navigator.onLine) {
@@ -90,6 +99,7 @@ export function deleteRecord(module, model, recordID) {
     const empDel = JSON.parse(dataToDel);
     window.localStorage.setItem(`${toTitle(module)}s.${toTitle(model)}`, JSON.stringify(empDel));
 }
+
 export default {
   loadRecords, loadRecord, createRecord, deleteRecord,
 };

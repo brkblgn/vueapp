@@ -429,9 +429,6 @@ export default {
           country: "",
         },
       },
-      selected: {
-        company: "aa",
-      },
     };
   },
   mounted() {

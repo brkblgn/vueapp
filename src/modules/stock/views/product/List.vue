@@ -477,24 +477,6 @@
   </div>
 </template>
 <script>
-/* <label class="form-label">client</label>
-                <select
-                  class="form-select"
-                  placeholder="Select a date"
-                  id="select-people"
-                  value=""
-                  v-model="this.new_invoice.client_id"
-                >
-                  <option v-for="client in ClientGetter" :key="client.id"
-                    :value="client.id"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/000m.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    {{ client.company }}
-                  </option>
-                </select>
-                */
 import { mapGetters } from "vuex";
 import { loadRecords, createRecord, deleteRecord } from "@/services/model";
 

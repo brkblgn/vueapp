@@ -312,13 +312,11 @@
                 $t("projects.projects.modal.project_members")
               }}</label>
               <select
-                multiple
+                multiple="multiple"
                 class="vs__dropdown-toggle"
                 :taggable="true"
-                v-bind:class="{ 'fix-height': multiple === 'true' }"
                 placeholder="Select a name"
                 v-model="this.new_project.members"
-                @tag="addTag"
               >
                 <option
                   v-for="contact in ContactGetter"
@@ -330,14 +328,12 @@
                   {{ contact.name }}
                 </option>
               </select>
-              <tr v-for="i in multiselectList.length-1" :key="i">
-             <dd class="col-7" v-if="multiselectList[i] !== null"> Value:{{ memberss(multiselectList[i]).name }}</dd>
-              <!---  {{ this.multiselectList[i] }}---->
-                <button v-on:click="remove(this.multiselectList.[i])">
-                  Delete
-                </button>
-                <br />
-              </tr>
+              <ul class="list group mt - 3 mb -3 border - 0">
+<li v-for="i in multiselectList.length - 1" :key="i">
+  <input type="text"  v-if="multiselectList[i] !== null" class="form-ocntrol mr-2"  :value= this.memberss(multiselectList[i]).name disabled>
+  <button class="btn btn-sm btn-danger rounded-0 " v-on:click="remove(this.multiselectList.[i])">DELETE</button>
+</li>
+              </ul>
             </div>
           </fieldset>
         </div>
@@ -401,7 +397,6 @@ export default {
   mounted() {
     this.loadProjects();
     this.loadContacts();
-    console.log(this.multiselectList.length);
   },
   computed: {
     ...mapGetters("Project", [
@@ -425,61 +420,23 @@ export default {
     deleteProject(project) {
       deleteRecord("project", "project", project);
     },
-      ControlNull() {
-      for (let s = 0; s <= this.multiselectList.length - 1; s++) {
-        console.log(this.multiselectList[s]);
-        if (this.multiselectList[s] === null) {
-        return this.multiselectList.splice(this.multiselectList.indexOf(s), 1);
-        }
-      }
-      return true;
-    },
 
     remove(i) {
-      console.log("indexOf", this.multiselectList.indexOf(i));
       this.multiselectList.splice(this.multiselectList.indexOf(i), 1);
-      console.log("removeLength", this.multiselectList.length);
-      console.log(this.multiselectList);
       this.new_project.members = this.multiselectList;
-      return this.multiselectList;
     },
     AddMultiselect(i) {
-      // this.ControlNull()
-      console.log(this.ControlSame(i));
-      if (this.ControlSame(i)) {
-        // this.ControlSame(i);
-        this.multiselectList.push(i);
+      console.log(this.multiselectList.includes(i));
+      if (this.multiselectList.includes(i)) {
+        return false;
       }
-      //  console.log(i);
-      //  console.log("AddLength", this.multiselectList.length);
-      //  console.log(this.multiselectList);
+      this.multiselectList.push(i);
       this.new_project.members = this.multiselectList;
       return this.multiselectList;
-      // return this.contacts.find((contacts) => contacts._id === i);
     },
-    ControlSame(t) {
-      for (let s = 0; s <= this.multiselectList.length - 1; s++) {
-        console.log(this.multiselectList[s]);
-        if (this.multiselectList[s] === t) {
-          return false;
-        }
-      }
-      return true;
+    memberss(t) {
+      return this.contacts.find((contacts) => contacts._id === t);
     },
-    MemeberName(t) {
-      for (let s = 0; s <= this.multiselectList.length - 1; s++) {
-        console.log(this.multiselectList[s]);
-        if (this.multiselectList[s] === t) {
-          return false;
-        }
-      }
-      return true;
-    },
-     memberss(t) {
-      console.log(t);
-      return this.contacts.find((contacts) => (contacts._id) === t);
-    },
-
   },
 };
 </script>

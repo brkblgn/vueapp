@@ -117,49 +117,17 @@
                   <dt class="col-5">
                     {{ $t("projects.projects.project_members") }}
                   </dt>
-                  <!------    <dd class="col-7">
-                    <span>{{ project?.members.length }}</span>
-                    <span>{{ project?.members }}</span>
-                    <span>{{ project?.members[0] }}</span>
-                    <tr v-for="inv in ContactGetter" :key="inv._id">
-                       <tr v-for="i in project?.members.length - 1" :key="i">
-                      <td v-if="inv._id == project?.members[i]">
-                        <span>{{ inv.name }}</span>
-                      </td>
-                    </tr>
-                    <tr v-for="inv in ContactGetter" :key="inv._id">
-                      <span>{{ project?.members.forEach(memberss) }}</span>
-                      <td v-if="inv._id == project?.members.forEach(memberss)">
-                        <span>{{ inv.name }}</span>
-                      </td>
-                    </tr>
-                  </dd>
-                 <dd class="col-7">
-                    <span>{{ project?.members.length }}</span>
-                    <span>{{ project?.members }}</span>
-                    <tr v-for="inv in ContactGetter" :key="inv._id">
-                      <span>{{ project?.members.forEach(memberss) }}</span>
-                      <td v-if="project?.members.filter((p) => p._id === inv._id)">
-                        <span>{{ inv.name }}</span>
-                      </td>
-                    </tr>
-                  </dd>
-                       <tr v-for="inv in ContactGetter" :key="inv._id">
-                      <td>
-                        <span class="text-muted">{{ inv._id }}</span>
-                      </td>
-                       </tr>
-                        <dd v-for="a in ContactGetter"  :key="a._id">
-                    {{ memberss?.name (a._id) }}</dd>
+                  <ul class="list group mt - 3 mb -3 border - 0">
+                    <li v-for="i in project?.members.length" :key="i">
+ <input type="text"  v-if="project?.members[i - 1] !== null" class="form-ocntrol mr-2"  :value= this.memberss(project?.members[i-1]).name  disabled>
+                    </li>
+                  </ul>
+                    <ul class="list group mt - 3 mb -3 border - 0">
+                    <li v-for="i in project?.members.length" :key="i">
+ <input type="text"  v-if="project?.members[i - 1] !== null" class="form-ocntrol mr-2"  :value= functions.saymemebers(project?.members[i-1]).name  disabled>
+                    </li>
+                  </ul>
                 </dl>
-                    <dd v-for="a in ContactGetter"  :key="a._id">
-                    {{ memberss?.name(a._id)}}
-                    </dd>
-                      ---------------->
-                     <tr v-for="i in project?.members.length" :key="i">
-                  <dd class="col-7" v-if="project?.members[i - 1] !== null">{{ memberss(project?.members[i - 1]).name }}</dd>
-                     </tr>
-                  </dl>
               </div>
             </div>
           </div>
@@ -169,10 +137,12 @@
   </div>
 </template>
 <script>
-/* eslint no-underscore-dangle: 0 */
+
 /* eslint "no-trailing-spaces": ["warn", {"skipBlankLines": true}] */
-import { mapGetters } from "vuex";
-import { loadRecords, createRecord, deleteRecord } from "@/services/model";
+ import { mapGetters } from "vuex";
+ import { loadRecords, createRecord, deleteRecord } from "@/services/model";
+ import functions from "@/utils/functions"
+// Vue.prototype.$say = say
 
 export default {
   data() {
@@ -187,6 +157,7 @@ export default {
     };
   },
   mounted() {
+    functions.saymemebers();
     this.loadProjects();
     this.loadContacts();
   },
@@ -206,7 +177,7 @@ export default {
         const idd = this.$route.params.id;
         console.log(this.$route.params.id);
         console.log(Number(this.$route.params.id));
-        return idd ? this.projects.find((project) => project._id === idd) : {};
+        return idd ? this.projects.find((project) => (project._id) === idd) : {};
       },
     },
   },
@@ -223,10 +194,13 @@ export default {
     deleteProject(project) {
       deleteRecord("project", "project", project);
     },
-    memberss(idd) {
-      console.log(idd);
-      return this.contacts.find((contacts) => contacts._id === idd);
-    },
+  //  memberss(idd) {
+  //  say("contacts", idd);
+  //  },
+   memberss(idd) {
+    console.log(idd);
+    return this.contacts.find((contacts) => (contacts._id) === idd);
+  },
   },
 };
 </script>

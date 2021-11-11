@@ -18,7 +18,18 @@ module.exports = {
     'max-len': 'off',
     "quotes": [0, "double"],
     "space-before-function-paren": "error",
-    'no-plusplus': 0
+    'no-plusplus': 0,
+    'vue/no-deprecated-slot-attribute': 'off',
+    'padded-blocks': ["error", { "blocks": "always" }] ,
+    'no-underscore-dangle': 0,
+    'no-param-reassign': 0,
+    'object-curly-newline': 'off',
+    "eol-last" :0,
+    'padded-blocks': ['error', {
+      blocks: 'never',
+      classes: 'never',
+      switches: 'never',
+    }]
   },
   overrides: [
     {
