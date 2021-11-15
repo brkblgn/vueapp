@@ -10,6 +10,7 @@ const productRouter = [
     meta: {
       title: 'products',
       icon: 'table',
+      notrequiresAuth: true,
     },
     beforeEnter: () => {
       store.dispatch('toggleSidebar', markRaw(defineAsyncComponent(() => import('@/modules/stock/components/Navbara.vue'))));

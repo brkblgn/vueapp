@@ -30,7 +30,7 @@
               </label>
             </div>
             <div class="form-footer">
-              <button class="btn-primary" @click ="this.register()" >Create new account</button>
+              <button class="btn btn-primary w-100" @click ="this.register()" >Create new account</button>
             </div>
           </div>
         </div>

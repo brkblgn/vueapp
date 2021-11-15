@@ -2,7 +2,6 @@ const state = {
   navbara: null,
   navbara_title: 'b',
   token: localStorage.getItem("token") || null,
-  // token:"",
 };
 const getters = {
   navbara: (state) => (state).navbara,

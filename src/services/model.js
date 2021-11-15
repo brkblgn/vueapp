@@ -2,11 +2,7 @@ import axios from 'axios';
 import store from '@/store';
 import { toTitle } from '@/utils/case';
 
-if (localStorage.getItem("token") == null) {
-  this.$router.push('@/auth/views/auth')
-}
 const API_URL2 = 'http://bb.linux.com.tr:3000';
-
 export function loadRecords(module, model) {
   const optionAxios = {
     headers: {

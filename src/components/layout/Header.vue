@@ -120,6 +120,7 @@ export default {
   methods: {
       destroyToken() {
       localStorage.removeItem('token')
+       this.$router.push('/auth')
       },
   },
 };

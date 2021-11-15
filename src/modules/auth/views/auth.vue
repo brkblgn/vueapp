@@ -31,7 +31,7 @@
               </label>
             </div>
             <div class="form-footer">
-              <button class="btn-primary" @click ="this.login()">Sign in</button>
+              <button class="btn btn-primary w-100" @click ="this.login()">Sign in</button>
             </div>
           </div>
           <div class="hr-text">or</div>
@@ -61,11 +61,10 @@
 </template>
 
 <script>
-
 import axios from "axios"
-// import Button from '../../../../../../components-ovavo/src/components/Layout/Button/Button.vue';
+
 export default {
-  // components: { Button },
+
   data() {
     return {
       new_login: {
@@ -86,6 +85,7 @@ export default {
             }).catch((errors) => {
                 // catch errors
                 console.log(errors)
+                console.log(this.new_login.password)
             })
       },
   },

@@ -32,4 +32,5 @@ const listRouter = [
     },
   },
 ];
+
 export default listRouter;
