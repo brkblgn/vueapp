@@ -269,7 +269,6 @@
       </div>
     </div>
   </div>
-
   <div
     class="modal modal-blur fade"
     id="modal-report"
@@ -291,7 +290,7 @@
           ></button>
         </div>
         <div class="modal-body">
-           <fieldset class="form-fieldset">
+          <fieldset class="form-fieldset">
             <div class="mb-3">
               <label class="form-label required">{{
                 $t("contacts.contacts.modal.contact_name")
@@ -313,61 +312,84 @@
                 autocomplete="off"
                 v-model="this.new_contact.email"
               />
-              </div>
-                <div class="mb-3">
-              <label class="form-label"> {{ $t("contacts.contacts.modal.contact_phone") }}</label>
-              <input type="text"
-                  class="form-control"
-                  data-mask="(00) 0000-0000"
-                  data-mask-visible="true"
-                  placeholder="(00) 0000-0000"
-                  autocomplete="off"  v-model="this.new_contact.phone" />
             </div>
-
-             </fieldset>
-               <strong >ADRES</strong>
-                 <fieldset class="form-fieldset">
             <div class="mb-3">
-               <div class="form-group mb-3 ">
-                 <label class="form-label required">{{
-                $t("contacts.contacts.modal.contact_adress.country")
-              }}</label>
+              <label class="form-label">
+                {{ $t("contacts.contacts.modal.contact_phone") }}</label
+              >
               <input
-                type="email"
+                type="text"
                 class="form-control"
+                data-mask="(00) 0000-0000"
+                data-mask-visible="true"
+                placeholder="(00) 0000-0000"
                 autocomplete="off"
-                v-model="this.new_contact.address.country"
+                v-model="this.new_contact.phone"
               />
-                <label class="form-label required">{{
-                $t("contacts.contacts.modal.contact_adress.town")
-              }}</label>
-              <input
-                type="email"
-                class="form-control"
-                autocomplete="off"
-                v-model="this.new_contact.address.town"
-              />
-                  <label class="form-label required">{{
-                $t("contacts.contacts.modal.contact_adress.city")
-              }}</label>
-              <input
-                type="email"
-                class="form-control"
-                autocomplete="off"
-                v-model="this.new_contact.address.city"
-              />
-              <label class="form-label required">{{
-                $t("contacts.contacts.modal.contact_adress.street")
-              }}</label>
-              <input
-                type="email"
-                class="form-control"
-                autocomplete="off"
-                v-model="this.new_contact.address.street"
-              />
-            </div>
             </div>
           </fieldset>
+            <strong>ADRES</strong>
+           <fieldset class="form-fieldset">
+            <div class="mb-3">
+              <label class="form-label required">{{
+                $t("contacts.contacts.modal.contact_adress.city")
+              }}</label>
+          <select  class="form-control" @change="town($event)">
+            <option></option>
+            <option
+              v-for="i in CityGetter"
+              :key="i.name"
+              :value="i.key"
+              :name="i.name"
+            >
+              {{ i.name }}
+            </option>
+          </select>
+            </div>
+              <div class="mb-3">
+                  <label class="form-label required">{{
+                $t("contacts.contacts.modal.contact_adress.town")
+              }}</label>
+          <select class="form-control" @change="neighborhood($event)">
+             <option></option>
+            <option
+              v-for="i in gettown"
+              :key="i.key"
+              :value="i.key"
+              :name="i.name"
+            >
+              {{ i.name }}
+            </option>
+          </select>
+              </div>
+              <div class="mb-3">
+                 <label class="form-label required">{{
+                $t("contacts.contacts.modal.contact_adress.neighborhood")
+              }}</label>
+          <select class="form-control" @change="street($event)">
+             <option></option>
+            <option
+              v-for="i in getneighborhood"
+              :key="i.key"
+              :value="i.key"
+              :name="i.name"
+            >
+              {{ i.name }}
+            </option>
+          </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label required">{{
+                $t("contacts.contacts.modal.contact_adress.street")
+              }}</label>
+          <select class="form-control" v-model="this.new_contact.address.street">
+             <option></option>
+            <option v-for="i in getstreet" :key="i.key" :value="i.name">
+              {{ i.name }}
+            </option>
+          </select>
+              </div>
+         </fieldset>
         </div>
         <div class="modal-footer">
           <a
@@ -406,13 +428,13 @@
       </div>
     </div>
   </div>
-
 </template>
-
 <script>
 import { mapGetters } from "vuex";
 import { loadRecords, createRecord, deleteRecord } from "@/services/model";
+import axios from "axios";
 
+const API_URL2 = "http://bb.linux.com.tr:3000";
 export default {
   data() {
     return {
@@ -423,31 +445,93 @@ export default {
         phone: null,
         website: null,
         address: {
-          street: " ",
           town: " ",
           city: " ",
-          country: "",
+          neighborhood: " ",
+          street: " ",
+          country: "Turkey",
         },
       },
+      selected: null,
+      gettown: [],
+      getneighborhood: [],
+      getstreet: [],
     };
   },
   mounted() {
     this.loadContacts();
+    this.loadCity();
   },
   computed: {
-    ...mapGetters("Contact", [
-      "ContactGetter", // -> this.someGetter
-    ]),
+    ...mapGetters("Contact", ["ContactGetter"]),
+    ...mapGetters("Addresse", ["CityGetter"]),
   },
   methods: {
     loadContacts() {
       loadRecords("Contact", "contact");
     },
     postContact(contact) {
-      createRecord("Contact", "contact", contact);
+      createRecord("contact", "contact", contact);
     },
     deleteContact(contact) {
       deleteRecord("contact", "contact", contact);
+    },
+    loadCity() {
+      loadRecords("Addresse", "city");
+    },
+
+    town(event) {
+      this.selected = event.target.value;
+      console.log(this.selected);
+      const name = event.target.selectedOptions[0].getAttribute("name");
+      console.log(name);
+      this.new_contact.address.city = name;
+      console.log(this.new_contact.address.city);
+      const key = this.selected;
+      console.log(key);
+      axios
+        .get(`${API_URL2}/addresses/town/${key}`)
+        .then((response) => {
+          console.log(response.data);
+          this.gettown = response.data;
+        })
+        .catch(Error);
+      console.log(Error);
+    },
+
+    neighborhood(event) {
+      this.selected = event.target.value;
+      console.log(this.selected);
+      const name = event.target.selectedOptions[0].getAttribute("name");
+      console.log(name);
+      this.new_contact.address.town = name;
+      console.log(this.new_contact.address.town);
+      const key = this.selected;
+      axios
+        .get(`${API_URL2}/addresses/neighborhood/${key}`)
+        .then((response) => {
+          console.log(response.data);
+          this.getneighborhood = response.data;
+        })
+        .catch(Error);
+      console.log(Error);
+    },
+    street(event) {
+      this.selected = event.target.value;
+      console.log(this.selected);
+      const name = event.target.selectedOptions[0].getAttribute("name");
+      console.log(name);
+      this.new_contact.address.neighborhood = name;
+      console.log(this.new_contact.address.neighborhood);
+      const key = this.selected;
+      axios
+        .get(`${API_URL2}/addresses/street/${key}`)
+        .then((response) => {
+          console.log(response.data);
+          this.getstreet = response.data;
+        })
+        .catch(Error);
+      console.log(Error);
     },
   },
 };

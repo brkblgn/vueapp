@@ -21,7 +21,7 @@
         <span class="nav-link-title"> Sales </span>
       </a>
       <div class="dropdown-menu">
-        <router-link class="dropdown-item" to="/sales/invoices">
+        <router-link class="dropdown-item" to="/sale/orders">
           Invoices
         </router-link>
       </div>

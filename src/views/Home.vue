@@ -75,7 +75,7 @@
       <div class="container-xl">
         <div class="row row-cards">
           <div class="col-sm-6 col-md-6 col-xl-3">
-            <router-link class="card card-link" to="/sales/invoices">
+            <router-link class="card card-link" to="/sale/orders">
               <div class="card-body">
                 <div class="row">
                   <div class="col-auto">
@@ -156,7 +156,8 @@
             </router-link>
           </div>
           <div class="col-sm-6 col-md-6 col-xl-3">
-            <router-link class="card card-link" to="/sales/clients">
+            <!---- to="/sales/clients">------->
+            <router-link class="card card-link" to="/contacts">
               <div class="card-body">
                 <div class="row">
                   <div class="col-auto">
@@ -243,7 +244,7 @@
             </router-link>
           </div>
           <div class="col-sm-6 col-md-6 col-xl-3">
-            <router-link class="card card-link" to="/sales/invoices">
+            <router-link class="card card-link" to="/sale/orders">
               <div class="card-body">
                 <div class="row">
                   <div class="col-auto">
@@ -372,52 +373,54 @@
           </div>
           <div class="col-sm-6 col-md-6 col-xl-3">
             <router-link class="card card-link" to="/projects">
-            <a class="card card-link" href="#">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-auto">
-                    <span
-                      class="avatar rounded"
-                      style="background-color: smoke"
-                    >
-                      <!-- Download SVG icon from http://tabler-icons.io/i/chart-bubble -->
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="icon"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        stroke-width="2"
-                        stroke="currentColor"
-                        fill="none"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+              <a class="card card-link" href="#">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-auto">
+                      <span
+                        class="avatar rounded"
+                        style="background-color: smoke"
                       >
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <circle cx="6" cy="16" r="3" />
-                        <circle cx="16" cy="19" r="2" />
-                        <circle cx="14.5" cy="7.5" r="4.5" />
-                      </svg>
-                    </span>
-                  </div>
-                  <div class="col">
-                    <div class="font-weight-medium">
-                      {{ $t("apps.project") }}
+                        <!-- Download SVG icon from http://tabler-icons.io/i/chart-bubble -->
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <circle cx="6" cy="16" r="3" />
+                          <circle cx="16" cy="19" r="2" />
+                          <circle cx="14.5" cy="7.5" r="4.5" />
+                        </svg>
+                      </span>
                     </div>
-                    <div class="text-muted">
-                      2 {{ $t("header.new_notification") }}
+                    <div class="col">
+                      <div class="font-weight-medium">
+                        {{ $t("apps.project") }}
+                      </div>
+                      <div class="text-muted">
+                        2 {{ $t("header.new_notification") }}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </a>
+              </a>
             </router-link>
           </div>
 
           <div class="col-md-8">
             <div class="card" style="height: calc(24rem + 10px)">
               <div
-                class="card-body card-body-scrollable card-body-scrollable-shadow"
+                class="
+                  card-body card-body-scrollable card-body-scrollable-shadow
+                "
               >
                 <div class="divide-y">
                   <div>
@@ -774,7 +777,7 @@
                           >
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path
-d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2"
+                              d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2"
                             />
                             <path d="M12 3v3m0 12v3" />
                           </svg>
@@ -864,8 +867,7 @@ d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 
                 <div class="card card-sm">
                   <div class="card-body">
                     <div class="row align-items-center">
-                      <div class="col-auto">
-                      </div>
+                      <div class="col-auto"></div>
                       <div class="col">
                         <div class="font-weight-medium">623 Shares</div>
                         <div class="text-muted">16 today</div>
@@ -895,7 +897,7 @@ d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 
                           >
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path
-d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3"
+                              d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3"
                             />
                           </svg>
                         </span>
@@ -920,7 +922,7 @@ d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3"
 // @ is an alias to /src
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {},
 };
 </script>

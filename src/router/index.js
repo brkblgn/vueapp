@@ -26,7 +26,6 @@ const routes = [
     },
   },
 ];
-
 // Import all of the resource routes files.
 function loadRoutes() {
   const context = require.context('@/modules', true, /routes.js$/i);
@@ -40,6 +39,7 @@ resourceRoutes.forEach((route) => {
     routes.push(rout);
   });
 });
+
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
@@ -58,22 +58,3 @@ router.beforeEach((to, form, next) => {
   }
 })
 export default router;
-/*
-function loadRoutes() {
-  const context = require.context('@/modules', true, /routes.js$/i);
-  return context.keys()
-    .map(context) // import module
-    .map((m) => (m).default); // get `default` export from each resolved module
-}
-if (loggedIn !== null) {
-const resourceRoutes = loadRoutes();
-resourceRoutes.forEach((route) => {
-  route.forEach((rout) => {
-    routes.push(rout);
-  });
-});
-} else {
-  // router.push('@/auth/views/auth')
-  routes.push('/');
-}
-*/

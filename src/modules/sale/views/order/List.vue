@@ -6,15 +6,15 @@
         <div class="row align-items-center">
           <div class="col">
             <!-- Page pre-title -->
-            <div class="page-pretitle">{{ $t("sales.clients") }}</div>
-            <h2 class="page-title">{{ $t("sales.invoices.invoices") }}</h2>
+            <div class="page-pretitle">{{ $t("sales.sales") }}</div>  <!-- Satislar -->
+            <h2 class="page-title">{{ $t("sales.invoices.invoices") }}</h2> <!-- Faturalar -->
           </div>
           <!-- Page title actions -->
           <div class="col-auto ms-auto d-print-none">
             <div class="btn-list">
               <span class="d-none d-sm-inline">
                 <a href="#" class="btn btn-white">
-                  {{ $t("sales.invoices.create_report") }}
+                   {{ $t("sales.invoices.create_report") }} <!-- "Satis Raporu Olustur", -->
                 </a>
               </span>
               <a
@@ -40,14 +40,14 @@
                   <line x1="12" y1="5" x2="12" y2="19" />
                   <line x1="5" y1="12" x2="19" y2="12" />
                 </svg>
-                {{ $t("sales.invoices.create_invoice") }}
+                {{ $t("sales.invoices.create_invoice") }} <!-- "Fatura Olustur", -->
               </a>
               <a
                 href="#"
                 class="btn btn-primary d-sm-none btn-icon"
                 data-bs-toggle="modal"
                 data-bs-target="#modal-report"
-                aria-label="Create new client"
+                aria-label="Create new invoice"
               >
                 <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                 <svg
@@ -78,7 +78,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">clients</h3>
+                <h3 class="card-title">Invoices</h3>
               </div>
               <div class="card-body border-bottom py-3">
                 <div class="d-flex">
@@ -90,7 +90,7 @@
                         class="form-control form-control-sm"
                         value="8"
                         size="3"
-                        aria-label="clients count"
+                        aria-label="Invoices count"
                       />
                     </div>
                     entries
@@ -101,7 +101,7 @@
                       <input
                         type="text"
                         class="form-control form-control-sm"
-                        aria-label="Search client"
+                        aria-label="Search invoice"
                       />
                     </div>
                   </div>
@@ -117,7 +117,7 @@
                         <input
                           class="form-check-input m-0 align-middle"
                           type="checkbox"
-                          aria-label="Select all clients"
+                          aria-label="Select all invoices"
                         />
                       </th>
                       <th class="w-1">
@@ -139,43 +139,43 @@
                           <polyline points="6 15 12 9 18 15" />
                         </svg>
                       </th>
-                      <th>client Subject</th>
-                      <th>{{ $t("sales.invoices.table.client") }}</th>
-                      <th>VAT No.</th>
-                      <th>{{ $t("sales.invoices.table.created_at") }}</th>
-                      <th>Status</th>
-                      <th>{{ $t("sales.invoices.table.price") }}</th>
+                      <th>{{ $t("sales.invoices.table.client") }}</th>  <!-- Musteri -->
+                      <th>{{ $t("sales.invoices.table.created_at") }}</th><!-- Tarih -->
+                      <th>{{ $t("sales.invoices.table.salesPerson") }}</th>  <!-- Stış Elemanı -->
+                      <th>{{ $t("sales.invoices.table.price") }}</th><!-- Tutar -->
                       <th></th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="inv in ClientGetter" :key="inv.id">
+                    <tr v-for="inv in OrderGetter" :key="inv._id">
                       <td>
                         <input
                           class="form-check-input m-0 align-middle"
                           type="checkbox"
-                          aria-label="Select client"
+                          aria-label="Select invoice"
                         />
                       </td>
-                      <td>
-                        <span class="text-muted">{{ inv.company }}</span>
-                      </td>
-                      <td>
-                        <a
-                          href="invoice.html"
+
+                         <td>
+                        <router-link
+                          :to="{ name: 'Order', params: { id: inv._id } }"
                           class="text-reset"
                           tabindex="-1"
-                          >{{ inv.company }}</a
+                          >{{ inv._id }}</router-link
                         >
                       </td>
                       <td>
-                        <span class="flag flag-country-us"></span>
-                        {{ inv.client_id }}
+                        {{this.contactss(inv.customer).name }}
                       </td>
-                      <td>87956621</td>
-                      <td>{{ inv.company }}</td>
+                        <td>
+                        {{ inv.createdAt}}
+                      </td>
+                      <td>
+                        <span class="flag flag-country-us"></span>
+                    {{this.contactss(inv.salesPerson).name }}
+                      </td>
+                      <td>{{ inv.totalAmount }}</td>
                       <td><span class="badge bg-success me-1"></span> Paid</td>
-                      <td>{{ inv.company }} {{ inv.short_name }}</td>
                       <td class="text-end">
                         <span class="dropdown">
                           <button
@@ -189,7 +189,7 @@
                             <a class="dropdown-item" href="#"> Duzenle </a>
                             <a
                               class="dropdown-item"
-                              @click="deleteClientt(inv.id)"
+                              @click="this.deleteOrder(inv._id)"
                             >
                               Sil
                             </a>
@@ -279,7 +279,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">New report</h5>
+          <h5 class="modal-title">{{ $t("sales.invoices.modal.new_invoice") }}</h5>
           <button
             type="button"
             class="btn-close"
@@ -291,169 +291,27 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="mb-3">
-                <label class="form-label">Fatura Basligi</label>
-                <input type="text" class="form-control" />
+                <label class="form-label">{{ $t("sales.invoices.modal.invoice_title") }}</label>
+                <input type="text" class="form-control" v-model ="this.new_invoice.title" />
               </div>
             </div>
             <div class="col-lg-6">
               <div class="mb-3">
                 <label class="form-label">client</label>
                 <select
-                  type="text"
                   class="form-select"
                   placeholder="Select a date"
                   id="select-people"
                   value=""
+                  v-model="this.new_invoice.client_id"
                 >
-                  <option
-                    value="1"
+                  <option v-for="client in 19" :key="client.id"
+                    :value="1"
                     data-custom-properties=
 '&lt;span class="avatar avatar-xs"
 style="background-image: url(./static/avatars/000m.jpg)"&gt;&lt;/span&gt;'
                   >
-                    Paweł Kuna
-                  </option>
-                  <option
-                    value="2"
-                    data-custom-properties='&lt;span class="avatar avatar-xs"&gt;JL&lt;/span&gt;'
-                  >
-                    Jeffie Lewzey
-                  </option>
-                  <option
-                    value="3"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/002m.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Mallory Hulme
-                  </option>
-                  <option
-                    value="4"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/003m.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Dunn Slane
-                  </option>
-                  <option
-                    value="5"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/000f.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Emmy Levet
-                  </option>
-                  <option
-                    value="6"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/001f.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Maryjo Lebarree
-                  </option>
-                  <option
-                    value="7"
-                    data-custom-properties='&lt;span class="avatar avatar-xs"&gt;EP&lt;/span&gt;'
-                  >
-                    Egan Poetz
-                  </option>
-                  <option
-                    value="8"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/002f.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Kellie Skingley
-                  </option>
-                  <option
-                    value="9"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/003f.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Christabel Charlwood
-                  </option>
-                  <option
-                    value="10"
-                    data-custom-properties='&lt;span class="avatar avatar-xs"&gt;HS&lt;/span&gt;'
-                  >
-                    Haskel Shelper
-                  </option>
-                  <option
-                    value="11"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/006m.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Lorry Mion
-                  </option>
-                  <option
-                    value="12"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/004f.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Leesa Beaty
-                  </option>
-                  <option
-                    value="13"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/007m.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Perren Keemar
-                  </option>
-                  <option
-                    value="14"
-                    data-custom-properties='&lt;span class="avatar avatar-xs"&gt;SA&lt;/span&gt;'
-                  >
-                    Sunny Airey
-                  </option>
-                  <option
-                    value="15"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/009m.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Geoffry Flaunders
-                  </option>
-                  <option
-                    value="16"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/010m.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Thatcher Keel
-                  </option>
-                  <option
-                    value="17"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/005f.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Dyann Escala
-                  </option>
-                  <option
-                    value="18"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/006f.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Avivah Mugleston
-                  </option>
-                  <option
-                    value="19"
-                    data-custom-properties='&lt;span class="avatar avatar-xs"&gt;AA&lt;/span&gt;'
-                  >
-                    Arlie Armstead
-                  </option>
-                  <option
-                    value="20"
-                    data-custom-properties=
-'&lt;span class="avatar avatar-xs"
-style="background-image: url(./static/avatars/008f.jpg)"&gt;&lt;/span&gt;'
-                  >
-                    Tessie Curzon
+                    {{ }}
                   </option>
                 </select>
               </div>
@@ -498,7 +356,7 @@ style="background-image: url(./static/avatars/008f.jpg)"&gt;&lt;/span&gt;'
               class="form-control"
               name="example-text-input"
               placeholder="Your report name"
-              v-model="new_client.company"
+              v-model="new_invoice.title"
             />
           </div>
           <label class="form-label">Report type</label>
@@ -615,7 +473,10 @@ style="background-image: url(./static/avatars/008f.jpg)"&gt;&lt;/span&gt;'
           >
             Cancel
           </a>
-          <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+          <a href="#"
+            class="btn btn-primary ms-auto"
+            data-bs-dismiss="modal"
+            @click="this.postOrder(new_invoice)">
             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -639,108 +500,6 @@ style="background-image: url(./static/avatars/008f.jpg)"&gt;&lt;/span&gt;'
       </div>
     </div>
   </div>
-  <div
-    class="modal modal-blur fade"
-    id="modal-report2"
-    tabindex="-1"
-    role="dialog"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">New Invoice</h5>
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        <div class="modal-body">
-          <div class="mb-3">
-            <label class="form-label">Name</label>
-            <input
-              type="text"
-              class="form-control"
-              name="example-text-input"
-              placeholder="Your report name"
-              v-model="new_client.company"
-            />
-            <small v-if="!new_client.company" class="form-text text-danger"
-              >The Name filed is required</small
-            >
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Job Title</label>
-            <input
-              type="text"
-              class="form-control"
-              name="example-text-input"
-              placeholder="Your report name"
-              v-model="new_client.company"
-            />
-            <small v-if="!new_client.company" class="form-text text-danger"
-              >The Job Title filed is required</small
-            >
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Pay Rate</label>
-            <input
-              type="text"
-              class="form-control"
-              name="example-text-input"
-              placeholder="Your report name"
-              v-model="new_client.company"
-            />
-            <small v-if="!new_client.company" class="form-text text-danger"
-              >The Job Title filed is required</small
-            >
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Active</label>
-            <input
-              type="radio"
-              id="one"
-              value="1"
-              v-model="new_client.company"
-            />
-            <label for="one">Active</label>
-            <br />
-            <input
-              type="radio"
-              id="zero"
-              value="0"
-              v-model="new_client.company"
-            />
-            <label for="two">Passive</label>
-            <br />
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
-          </button>
-          <span aria-hidden="true"></span>
-          <button
-            type="button"
-            class="btn btn-primary ms-auto"
-            data-bs-dismiss="modal"
-            @click="postClient(new_client)"
-            :disabled="
-              !new_client.company ||
-              !new_client.short_name
-            "
-          >
-            Save
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -749,37 +508,53 @@ import {
   loadRecords,
   createRecord,
   deleteRecord,
-} from '@/services/modela';
+} from '@/services/model';
 
 export default {
   data() {
     return {
-      new_client: {
-        id: '',
-        company: '',
-        short_name: '',
-        active: 1,
+      new_invoice: {
+        customer: null,
+        salesPerson: null,
+        product: [],
+      },
+      selected: {
+        company: 'aa',
       },
     };
   },
   mounted() {
-    this.loadClient();
+    this.loadOrders();
+    this.loadContacts();
   },
   computed: {
-    ...mapGetters('Client', [
-      'ClientGetter', // -> this.someGetter
+    ...mapGetters("Sale", [
+      'OrderGetter', // -> this.someGetter
     ]),
+      ...mapGetters('Contact', [
+      'ContactGetter', // -> this.someGetter
+    ]),
+      contacts() {
+      return this.ContactGetter;
+    },
   },
   methods: {
-    loadClient() {
-      loadRecords('Client', 'client');
+    loadOrders() {
+      loadRecords("Sale", "order");
     },
-    postClient(client) {
-      createRecord('Client', 'client', client);
+    postOrder(order) {
+      createRecord("Sale", "order", order);
     },
-    deleteClientt(client) {
-      deleteRecord('Client', 'client', client);
+    deleteOrder(order) {
+      deleteRecord("Sale", "order", order);
     },
+      loadContacts() {
+      loadRecords('contact', 'contact');
+    },
+    contactss(idd) {
+    console.log(idd);
+    return this.contacts.find((contacts) => (contacts._id) === idd);
+  },
   },
 };
 </script>

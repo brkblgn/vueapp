@@ -11,16 +11,16 @@
         <span class="nav-link-title"> {{ $t("navbar.sales.orders") }} </span>
       </a>
       <div class="dropdown-menu">
-        <router-link class="dropdown-item" to="/sales/invoices">
+        <router-link class="dropdown-item" to="/sale/orders">
           Quatations
         </router-link>
-        <router-link class="dropdown-item" to="/sales/invoices">
+        <router-link class="dropdown-item" to="/sale/orders">
           Orders
         </router-link>
-        <router-link class="dropdown-item" to="/sales/invoices">
+        <router-link class="dropdown-item" to="/sale/orders">
           Sales Teams
         </router-link>
-        <router-link class="dropdown-item" to="/sales/invoices">
+        <router-link class="dropdown-item" to="/sale/orders">
           Customers
         </router-link>
       </div>

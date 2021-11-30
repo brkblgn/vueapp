@@ -10,6 +10,7 @@ const listRouter = [
     meta: {
       title: 'Projects',
       icon: 'table',
+      requiresAuth: true,
     },
     beforeEnter: () => {
       store.dispatch('toggleSidebar', markRaw(defineAsyncComponent(() => import('@/modules/project/components/Navbara.vue'))));
@@ -24,6 +25,7 @@ const listRouter = [
     meta: {
       title: 'Projectsa',
       icon: 'table',
+    requiresAuth: true,
     },
     beforeEnter: () => {
       store.dispatch('toggleSidebar', markRaw(defineAsyncComponent(() => import('@/modules/sale/components/Navbara.vue'))));

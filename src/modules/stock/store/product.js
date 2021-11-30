@@ -11,11 +11,9 @@ const getters = {
     return state.products;
   },
 };
-
 // actions
 const actions = {
 };
-
 // mutations
 const mutations = {
   SET_PRODUCTS(state, data) {

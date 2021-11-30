@@ -50,8 +50,9 @@
                 "contact_phone": "Phone number",
                 "contact_adress": {
                     "street": "Sokak",
-                    "town": "Şehir/Town",
-                    "city": "Şehir/City",
+                    "neighborhood": "Semt",
+                    "town": "Kent",
+                    "city": "Şehir",
                     "country": "Ülke"
                 }
             }
@@ -72,7 +73,8 @@
             "table": {
                 "client": "Musteri",
                 "price": "Tutar",
-                "created_at": "Tarih"
+                "created_at": "Tarih",
+                "salesPerson":"Satış Elemanı"
             },
             "modal": {
                 "new_invoice": "Fatura Olustur",

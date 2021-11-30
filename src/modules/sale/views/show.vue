@@ -113,9 +113,9 @@
                   <dt class="col-5">
                     {{ $t("projects.projects.project_name") }}
                   </dt>
-                  <dd class="col-7">{{ project?.name }}</dd>
+                  <dd class="col-7">{{ order?.name }}</dd>
                   <dt class="col-5">
-                    {{ $t("projects.projects.project_members") }}
+
                   </dt>
                   <ul class="list group mt - 3 mb -3 border - 0">
                     <li v-for="i in project?.members.length" :key="i">
@@ -151,47 +151,45 @@ export default {
     };
   },
   mounted() {
-   // functions.saymemebers();
-    this.loadProjects();
+    this.loadOrders();
     this.loadContacts();
   },
   computed: {
-    ...mapGetters("Project", [
-      "ProjectGetter", // -> this.someGetter
+    ...mapGetters("Sale", [
+      'OrderGetter', // -> this.someGetter
     ]),
-    ...mapGetters("Contact", ["ContactGetter"]),
-    projects() {
-      return this.ProjectGetter;
-    },
-    contacts() {
+      ...mapGetters('Contact', [
+      'ContactGetter', // -> this.someGetter
+    ]),
+      contacts() {
       return this.ContactGetter;
     },
-    project: {
+       orders() {
+      return this.OrderGetter;
+    },
+    order: {
       get() {
         const idd = this.$route.params.id;
         console.log(this.$route.params.id);
         console.log(Number(this.$route.params.id));
-        return idd ? this.projects.find((project) => (project._id) === idd) : {};
+        return idd ? this.orders.find((order) => (order._id) === idd) : {};
       },
     },
   },
-  methods: {
-    loadProjects() {
-      loadRecords("project", "project");
+    methods: {
+    loadOrders() {
+      loadRecords("Sale", "order");
     },
-    postProject(project) {
-      createRecord("project", "project", project);
+    postOrder(order) {
+      createRecord("Sale", "order", order);
     },
-    loadContacts() {
-      loadRecords("Contact", "contact");
+    deleteOrder(order) {
+      deleteRecord("Sale", "order", order);
     },
-    deleteProject(project) {
-      deleteRecord("project", "project", project);
+      loadContacts() {
+      loadRecords('contact', 'contact');
     },
-  //  memberss(idd) {
-  //  say("contacts", idd);
-  //  },
-   memberss(idd) {
+    contactss(idd) {
     console.log(idd);
     return this.contacts.find((contacts) => (contacts._id) === idd);
   },

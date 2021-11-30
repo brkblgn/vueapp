@@ -325,17 +325,17 @@
                   :option="contact._id"
                   @click="this.AddMultiselect(contact._id)"
                 >
-                  {{ contact.name }}
+                  {{ contact.name}}
                 </option>
               </select>
-              <ul class="list group mt - 3 mb -3 border - 0">
-<li v-for="i in multiselectList.length - 1" :key="i">
-  <input type="text"  v-if="multiselectList[i] !== null" class="form-ocntrol mr-2"  :value= this.memberss(multiselectList[i]).name disabled>
-  <button class="btn btn-sm btn-danger rounded-0 " v-on:click="remove(this.multiselectList.[i])">DELETE</button>
-</li>
-              </ul>
             </div>
           </fieldset>
+<ul  v-if="multiselectList.length !== 0" class="list group mt - 3 mb -3 border - 0">
+<li v-for="i in multiselectList.length" :key="i">
+<input type="text"  class="form-ocntrol mr-2"  :value= this.memberss(multiselectList[i-1]).name disabled>
+<button class="btn btn-sm btn-danger rounded-0 " v-on:click="remove(this.multiselectList.[i-1])">DELETE</button>
+</li>
+</ul>
         </div>
         <div class="modal-footer">
           <a
@@ -387,7 +387,7 @@ export default {
         name: null,
         members: [],
       },
-      multiselectList: [null],
+    multiselectList: [],
       selected: {
         company: "aa",
       },
@@ -412,7 +412,7 @@ export default {
       loadRecords("Project", "project");
     },
     loadContacts() {
-      loadRecords("Contact", "contact");
+      loadRecords("contact", "contact");
     },
     postProject(project) {
       createRecord("Project", "project", project);
@@ -420,18 +420,19 @@ export default {
     deleteProject(project) {
       deleteRecord("project", "project", project);
     },
-
     remove(i) {
       this.multiselectList.splice(this.multiselectList.indexOf(i), 1);
       this.new_project.members = this.multiselectList;
     },
     AddMultiselect(i) {
-      console.log(this.multiselectList.includes(i));
+      console.log(this.multiselectList.length)
       if (this.multiselectList.includes(i)) {
         return false;
       }
       this.multiselectList.push(i);
       this.new_project.members = this.multiselectList;
+        console.log(this.multiselectList.length)
+         console.log(this.multiselectList)
       return this.multiselectList;
     },
     memberss(t) {

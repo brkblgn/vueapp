@@ -2,20 +2,21 @@ import store from '@/store';
 import { markRaw } from '@vue/reactivity';
 import { defineAsyncComponent } from 'vue';
 
-const clientRouter = [
+const cityRouter = [
   {
-    path: '/sales/clients',
-    component: () => import('@/modules/sale/views/client/List.vue'),
-    name: 'Client',
+    path: '/addresse/city',
+    component: () => import('@/modules/contact/views/List.vue'),
+    name: 'Citysa',
     meta: {
-      title: 'Client',
+      title: 'Citysa',
       icon: 'table',
+      requiresAuth: true,
     },
     beforeEnter: () => {
       store.dispatch('toggleSidebar', markRaw(defineAsyncComponent(() => import('@/modules/sale/components/Navbara.vue'))));
-      store.dispatch('toggleSidebarTitle', 'Sales');
-      console.log('Module: sale.clients');
+      store.dispatch('toggleSidebarTitle', 'City');
+      console.log('Module: City');
     },
   },
 ];
-export default clientRouter;
+export default cityRouter;

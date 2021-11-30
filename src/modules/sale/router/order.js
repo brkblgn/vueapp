@@ -2,37 +2,36 @@ import store from '@/store';
 import { markRaw } from '@vue/reactivity';
 import { defineAsyncComponent } from 'vue';
 
-const listRouter = [
+const orderRouter = [
   {
-    path: '/contacts/:id',
-    component: () => import('@/modules/contact/views/show.vue'),
-    name: 'Contacts',
+    path: '/sale/orders',
+    component: () => import('@/modules/sale/views/order/List.vue'),
+    name: 'orders',
     meta: {
-      title: 'Contacts',
+      title: 'orders',
       icon: 'table',
       requiresAuth: true,
     },
     beforeEnter: () => {
       store.dispatch('toggleSidebar', markRaw(defineAsyncComponent(() => import('@/modules/sale/components/Navbara.vue'))));
-      store.dispatch('toggleSidebarTitle', 'Contacts');
-      console.log('Module: contacts');
+      store.dispatch('toggleSidebarTitle', 'Sales');
+      console.log('BeforeEnter: sale.order');
     },
   },
   {
-    path: '/contacts',
-    component: () => import('@/modules/contact/views/List.vue'),
-    name: 'Contactsa',
+    path: '/sale/orders/:id',
+    component: () => import('@/modules/sale/views/show.vue'),
+    name: 'Order',
     meta: {
-      title: 'Contactsa',
+      title: 'Order',
       icon: 'table',
       requiresAuth: true,
     },
     beforeEnter: () => {
       store.dispatch('toggleSidebar', markRaw(defineAsyncComponent(() => import('@/modules/sale/components/Navbara.vue'))));
-      store.dispatch('toggleSidebarTitle', 'Contacts');
-      console.log('Module: contacts');
+      store.dispatch('toggleSidebarTitle', 'Sales');
+      console.log('Module: Order');
     },
   },
 ];
-
-export default listRouter;
+export default orderRouter;

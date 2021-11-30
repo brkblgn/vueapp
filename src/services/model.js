@@ -21,6 +21,7 @@ console.log(localStorage.getItem("token"))
       .then((response) => {
         store.commit(`${toTitle(module)}/SET_${model.toUpperCase()}S`, response.data);
         const stringData = JSON.stringify(response.data);
+        // console.log(stringData)
         window.localStorage.setItem(`${toTitle(module)}s.${toTitle(model)}`, stringData);
       });
   } catch (err) {

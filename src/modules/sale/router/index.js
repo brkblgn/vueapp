@@ -1,8 +1,5 @@
-import invoiceRouter from './invoice';
-import clientRouter from './client';
-
+import orderRouter from './order';
 const saleRouter = [
-  ...clientRouter,
-  ...invoiceRouter,
+  ...orderRouter,
 ];
 export default saleRouter;
